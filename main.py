@@ -96,6 +96,56 @@ def status() -> None:
     asyncio.run(_status())
 
 
+@app.command(name="normalize")
+def normalize_cmd() -> None:
+    """Re-run the normalizer on existing extracted data and export."""
+
+    async def _normalize() -> None:
+        from agents.normalizer import NormalizerAgent
+        from storage.database import init_db, reset_normalization
+        from storage.export import export_csv, export_json
+
+        settings = Settings()
+        db = await init_db(settings.db_path)
+        try:
+            await reset_normalization(db)
+            normalizer = NormalizerAgent()
+            await normalizer.run(settings, db)
+            csv_path = await export_csv(settings.db_path, settings.output_dir)
+            json_path = await export_json(settings.db_path, settings.output_dir)
+            typer.echo(f"Exported CSV:  {csv_path}")
+            typer.echo(f"Exported JSON: {json_path}")
+        finally:
+            await db.close()
+
+    asyncio.run(_normalize())
+
+
+@app.command(name="validate")
+def validate_cmd() -> None:
+    """Cross-check spec-key consistency within product groups and export."""
+
+    async def _validate() -> None:
+        from agents.validator import ValidatorAgent
+        from storage.export import export_csv, export_json
+
+        settings = Settings()
+
+        from storage.database import init_db
+        db = await init_db(settings.db_path)
+        try:
+            validator = ValidatorAgent()
+            await validator.run(settings, db)
+            csv_path = await export_csv(settings.db_path, settings.output_dir)
+            json_path = await export_json(settings.db_path, settings.output_dir)
+            typer.echo(f"Exported CSV:  {csv_path}")
+            typer.echo(f"Exported JSON: {json_path}")
+        finally:
+            await db.close()
+
+    asyncio.run(_validate())
+
+
 @app.command(name="export")
 def export_cmd() -> None:
     """Export existing data to CSV and JSON."""

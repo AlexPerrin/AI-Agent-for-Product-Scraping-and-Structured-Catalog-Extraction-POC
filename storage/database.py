@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS products (
     price                     TEXT DEFAULT '{}',    -- JSON dict  {qty: price_str}
     description               TEXT,
     unit_size                 TEXT,
+    specifications            TEXT DEFAULT '{}',    -- JSON dict  e.g. {"Size": "X-small"}
     availability              TEXT,
     group_description         TEXT,
     subgroup_name             TEXT,
@@ -54,6 +55,13 @@ async def init_db(db_path: str) -> aiosqlite.Connection:
     db.row_factory = aiosqlite.Row
     await db.execute(JOBS_SCHEMA)
     await db.execute(PRODUCTS_SCHEMA)
+    # Migration: add specifications column if it doesn't exist yet
+    try:
+        await db.execute("ALTER TABLE products ADD COLUMN specifications TEXT DEFAULT '{}'")
+        await db.commit()
+        log.info("database_migrated_specifications_column")
+    except Exception:
+        pass  # Column already exists
     await db.commit()
     log.info("database_initialised", path=db_path)
     return db
@@ -169,7 +177,7 @@ async def get_products_for_normalization(
     """Return products that have been extracted but not yet normalized."""
     cursor = await db.execute(
         """
-        SELECT id, item_number, product_name, description, unit_size, brand,
+        SELECT id, item_number, product_name, unit_size, brand,
                product_group_name, group_description
           FROM products
          WHERE extraction_method IS NOT NULL
@@ -187,33 +195,40 @@ async def update_normalized_fields(
     product_id: int,
     unit_size: Optional[str],
     brand: Optional[str],
+    specifications: Optional[str] = None,
 ) -> None:
     await db.execute(
-        "UPDATE products SET unit_size = ?, brand = ? WHERE id = ?",
-        (unit_size, brand, product_id),
+        "UPDATE products SET unit_size = ?, brand = ?, specifications = ? WHERE id = ?",
+        (unit_size, brand, specifications or "{}", product_id),
     )
     await db.commit()
 
 
-async def get_products_for_validation(
+async def get_all_normalized_products(
     db: aiosqlite.Connection,
-    batch_size: int = 20,
 ) -> list[dict[str, Any]]:
-    """Return normalized products awaiting validation."""
+    """Return all normalized products for cross-group validation."""
     cursor = await db.execute(
         """
-        SELECT id, product_group_name, product_name, brand, item_number,
-               manufacturer_number, price, description, unit_size, availability,
-               group_description, subgroup_name, product_group_url,
-               extraction_method
+        SELECT id, product_group_name, product_name, group_description, specifications
           FROM products
          WHERE validation_status = 'normalized'
-         LIMIT ?
-        """,
-        (batch_size,),
+        """
     )
     rows = await cursor.fetchall()
     return [dict(r) for r in rows]
+
+
+async def update_product_specifications(
+    db: aiosqlite.Connection,
+    product_id: int,
+    specifications: str,
+) -> None:
+    await db.execute(
+        "UPDATE products SET specifications = ? WHERE id = ?",
+        (specifications, product_id),
+    )
+    await db.commit()
 
 
 async def update_validation_fields(
@@ -225,6 +240,15 @@ async def update_validation_fields(
     await db.execute(
         "UPDATE products SET validation_status = ?, validation_notes = ? WHERE id = ?",
         (validation_status, validation_notes, product_id),
+    )
+    await db.commit()
+
+
+async def reset_normalization(db: aiosqlite.Connection) -> None:
+    """Reset all products back to pending so the normalizer re-processes them."""
+    await db.execute(
+        "UPDATE products SET validation_status = 'pending', specifications = '{}'"
+        " WHERE extraction_method = 'css-selector'"
     )
     await db.commit()
 

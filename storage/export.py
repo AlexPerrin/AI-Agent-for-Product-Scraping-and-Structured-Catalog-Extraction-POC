@@ -59,6 +59,7 @@ CSV_COLUMNS = [
     "availability",
     "group_description",
     "unit_size",
+    "specifications",
     "image_urls",
     "scraped_at",
     "extraction_method",
@@ -133,6 +134,7 @@ async def export_json(db_path: str, output_dir: str) -> str:
         "product_group_url",
         "price",
         "unit_size",
+        "specifications",
         "availability",
         "description",
         "image_urls",
@@ -145,7 +147,7 @@ async def export_json(db_path: str, output_dir: str) -> str:
     cleaned: list[dict[str, Any]] = []
     for rec in records:
         row = dict(rec)
-        for key in ("price", "category_hierarchy", "image_urls", "alternative_products"):
+        for key in ("price", "category_hierarchy", "image_urls", "alternative_products", "specifications"):
             if isinstance(row.get(key), str):
                 try:
                     row[key] = json.loads(row[key])

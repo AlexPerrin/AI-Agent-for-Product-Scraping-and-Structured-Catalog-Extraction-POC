@@ -74,8 +74,15 @@ class Orchestrator:
             else:
                 log.info("stage_product_scraper_skipped")
 
-            # --- Step 4: Normalizer (disabled) ---
-            # --- Step 5: Validator (disabled) ---
+            # --- Step 4: Normalizer ---
+            log.info("stage_normalizer")
+            normalizer = NormalizerAgent()
+            await normalizer.run(settings, db)
+
+            # --- Step 5: Validator ---
+            log.info("stage_validator")
+            validator = ValidatorAgent()
+            await validator.run(settings, db)
 
             # --- Step 6: Export ---
             log.info("stage_export")
