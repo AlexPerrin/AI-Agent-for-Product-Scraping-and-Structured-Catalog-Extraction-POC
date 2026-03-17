@@ -1,0 +1,569 @@
+(venv) alex@alex-desktop:~/Frontier-Dental-POC$ python main.py run --reset --limit 100
+2026-03-17T19:39:16.188371Z [info     ] orchestrator_start             export_only=False product_limit=100 reset=True skip_browser=False
+2026-03-17T19:39:16.191690Z [info     ] database_initialised           path=frontier_dental.db
+2026-03-17T19:39:16.241042Z [info     ] database_reset                
+2026-03-17T19:39:16.241100Z [info     ] stage_navigator               
+2026-03-17T19:39:16.241153Z [info     ] navigator_start               
+2026-03-17T19:39:16.559481Z [debug    ] sitemap_parsed                 count=314 url=https://www.safcodental.com/catalog.xml
+2026-03-17T19:39:16.672958Z [debug    ] sitemap_parsed                 count=4168 url=https://www.safcodental.com/products.xml
+2026-03-17T19:39:16.674216Z [info     ] navigator_categories_filtered  matched=16 total=314
+2026-03-17T19:39:17.123707Z [info     ] navigator_complete             category_jobs=16 product_jobs=4168
+2026-03-17T19:39:17.123833Z [info     ] stage_category_scraper        
+2026-03-17T19:39:17.134591Z [info     ] category_scraper_start        
+2026-03-17T19:39:17.135066Z [info     ] category_scraper_pending_jobs  count=16
+2026-03-17T19:39:17.135128Z [debug    ] http_get_no_raise              url=https://www.safcodental.com/catalog/gloves
+2026-03-17T19:39:30.221981Z [debug    ] category_scraped               products_found=56 url=https://www.safcodental.com/catalog/gloves
+2026-03-17T19:39:30.222062Z [debug    ] http_get_no_raise              url=https://www.safcodental.com/catalog/gloves/chloroprene-gloves
+2026-03-17T19:39:35.221810Z [debug    ] category_scraped               products_found=12 url=https://www.safcodental.com/catalog/gloves/chloroprene-gloves
+2026-03-17T19:39:35.221897Z [debug    ] http_get_no_raise              url=https://www.safcodental.com/catalog/gloves/glove-holder
+2026-03-17T19:39:37.276802Z [debug    ] category_scraped               products_found=1 url=https://www.safcodental.com/catalog/gloves/glove-holder
+2026-03-17T19:39:37.276883Z [debug    ] http_get_no_raise              url=https://www.safcodental.com/catalog/gloves/latex-gloves
+2026-03-17T19:39:42.506114Z [debug    ] category_scraped               products_found=18 url=https://www.safcodental.com/catalog/gloves/latex-gloves
+2026-03-17T19:39:42.506186Z [debug    ] http_get_no_raise              url=https://www.safcodental.com/catalog/gloves/nitrile-gloves
+2026-03-17T19:39:57.105426Z [debug    ] category_scraped               products_found=50 url=https://www.safcodental.com/catalog/gloves/nitrile-gloves
+2026-03-17T19:39:57.105506Z [debug    ] http_get_no_raise              url=https://www.safcodental.com/catalog/gloves/surgical-gloves
+2026-03-17T19:40:00.273732Z [debug    ] category_scraped               products_found=3 url=https://www.safcodental.com/catalog/gloves/surgical-gloves
+2026-03-17T19:40:00.273819Z [debug    ] http_get_no_raise              url=https://www.safcodental.com/catalog/gloves/vinyl-gloves
+2026-03-17T19:40:02.168976Z [debug    ] category_scraped               products_found=1 url=https://www.safcodental.com/catalog/gloves/vinyl-gloves
+2026-03-17T19:40:02.169056Z [debug    ] http_get_no_raise              url=https://www.safcodental.com/catalog/sutures-surgical-products
+2026-03-17T19:40:14.548848Z [debug    ] category_scraped               products_found=58 url=https://www.safcodental.com/catalog/sutures-surgical-products
+2026-03-17T19:40:14.548923Z [debug    ] http_get_no_raise              url=https://www.safcodental.com/catalog/sutures-surgical-products/bone-grafting
+2026-03-17T19:40:19.356496Z [debug    ] category_scraped               products_found=14 url=https://www.safcodental.com/catalog/sutures-surgical-products/bone-grafting
+2026-03-17T19:40:19.356579Z [debug    ] http_get_no_raise              url=https://www.safcodental.com/catalog/sutures-surgical-products/cold-packs
+2026-03-17T19:40:21.764093Z [debug    ] category_scraped               products_found=2 url=https://www.safcodental.com/catalog/sutures-surgical-products/cold-packs
+2026-03-17T19:40:21.764175Z [debug    ] http_get_no_raise              url=https://www.safcodental.com/catalog/sutures-surgical-products/iv-fluids-and-administration-sets
+2026-03-17T19:40:24.739421Z [debug    ] category_scraped               products_found=5 url=https://www.safcodental.com/catalog/sutures-surgical-products/iv-fluids-and-administration-sets
+2026-03-17T19:40:24.739503Z [debug    ] http_get_no_raise              url=https://www.safcodental.com/catalog/sutures-surgical-products/periodontal-dressings
+2026-03-17T19:40:27.097564Z [debug    ] category_scraped               products_found=4 url=https://www.safcodental.com/catalog/sutures-surgical-products/periodontal-dressings
+2026-03-17T19:40:27.097649Z [debug    ] http_get_no_raise              url=https://www.safcodental.com/catalog/sutures-surgical-products/surgical-blades-and-scalpels
+2026-03-17T19:40:31.943734Z [debug    ] category_scraped               products_found=15 url=https://www.safcodental.com/catalog/sutures-surgical-products/surgical-blades-and-scalpels
+2026-03-17T19:40:31.943805Z [debug    ] http_get_no_raise              url=https://www.safcodental.com/catalog/sutures-surgical-products/surgical-medicaments-and-packing
+2026-03-17T19:40:36.307262Z [debug    ] category_scraped               products_found=10 url=https://www.safcodental.com/catalog/sutures-surgical-products/surgical-medicaments-and-packing
+2026-03-17T19:40:36.307385Z [debug    ] http_get_no_raise              url=https://www.safcodental.com/catalog/sutures-surgical-products/suture-needles
+2026-03-17T19:40:38.215527Z [debug    ] category_scraped               products_found=1 url=https://www.safcodental.com/catalog/sutures-surgical-products/suture-needles
+2026-03-17T19:40:38.215618Z [debug    ] http_get_no_raise              url=https://www.safcodental.com/catalog/sutures-surgical-products/sutures
+2026-03-17T19:40:41.777513Z [debug    ] category_scraped               products_found=5 url=https://www.safcodental.com/catalog/sutures-surgical-products/sutures
+2026-03-17T19:40:41.777594Z [info     ] category_scraper_complete      processed=16 skipped_404=0
+2026-03-17T19:40:41.778307Z [info     ] stage_product_scraper_extractor
+2026-03-17T19:40:41.784187Z [info     ] product_extraction_limit_applied limit=100
+2026-03-17T19:40:41.784245Z [info     ] product_extraction_start       job_count=100
+2026-03-17T19:40:42.461822Z [info     ] browser_started               
+2026-03-17T19:40:42.584409Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/wire-glove-box-holder
+2026-03-17T19:40:42.586283Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/silkcare-reg
+2026-03-17T19:40:42.586902Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/nuvo-trade
+2026-03-17T19:40:45.945113Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/wire-glove-box-holder variant_count=3
+2026-03-17T19:40:46.009440Z [debug    ] browser_rendered               size=612164 url=https://www.safcodental.com/product/wire-glove-box-holder
+2026-03-17T19:40:46.056047Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/wire-glove-box-holder variant_count=3
+2026-03-17T19:40:46.099645Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/aloepro-trade
+2026-03-17T19:40:46.102085Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/nuvo-trade variant_count=4
+2026-03-17T19:40:46.116603Z [info     ] product_extracted              url=https://www.safcodental.com/product/wire-glove-box-holder variants=3
+2026-03-17T19:40:46.156146Z [debug    ] browser_rendered               size=678883 url=https://www.safcodental.com/product/nuvo-trade
+2026-03-17T19:40:46.190578Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/nuvo-trade variant_count=4
+2026-03-17T19:40:46.206208Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/silkcare-reg variant_count=4
+2026-03-17T19:40:46.208305Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/microflex-reg-diamond-grip-plus-trade
+2026-03-17T19:40:46.222408Z [info     ] product_extracted              url=https://www.safcodental.com/product/nuvo-trade variants=4
+2026-03-17T19:40:46.263231Z [debug    ] browser_rendered               size=721152 url=https://www.safcodental.com/product/silkcare-reg
+2026-03-17T19:40:46.302963Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/silkcare-reg variant_count=4
+2026-03-17T19:40:46.319210Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/aurelia-reg-refresh-reg
+2026-03-17T19:40:46.330982Z [info     ] product_extracted              url=https://www.safcodental.com/product/silkcare-reg variants=4
+2026-03-17T19:40:49.159274Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/aloepro-trade variant_count=4
+2026-03-17T19:40:49.211765Z [debug    ] browser_rendered               size=679356 url=https://www.safcodental.com/product/aloepro-trade
+2026-03-17T19:40:49.259431Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/aloepro-trade variant_count=4
+2026-03-17T19:40:49.279401Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/sigma-reg
+2026-03-17T19:40:49.295591Z [info     ] product_extracted              url=https://www.safcodental.com/product/aloepro-trade variants=4
+2026-03-17T19:40:49.427468Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/aurelia-reg-refresh-reg variant_count=5
+2026-03-17T19:40:49.487731Z [debug    ] browser_rendered               size=872513 url=https://www.safcodental.com/product/aurelia-reg-refresh-reg
+2026-03-17T19:40:49.528339Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/aurelia-reg-refresh-reg variant_count=5
+2026-03-17T19:40:49.546545Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/aurelia-reg-vibrant-trade
+2026-03-17T19:40:49.561653Z [info     ] product_extracted              url=https://www.safcodental.com/product/aurelia-reg-refresh-reg variants=5
+2026-03-17T19:40:49.835038Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/microflex-reg-diamond-grip-plus-trade variant_count=5
+2026-03-17T19:40:49.894908Z [debug    ] browser_rendered               size=873995 url=https://www.safcodental.com/product/microflex-reg-diamond-grip-plus-trade
+2026-03-17T19:40:49.932886Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/microflex-reg-diamond-grip-plus-trade variant_count=5
+2026-03-17T19:40:49.949779Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/micropro-textured
+2026-03-17T19:40:49.960202Z [info     ] product_extracted              url=https://www.safcodental.com/product/microflex-reg-diamond-grip-plus-trade variants=5
+2026-03-17T19:40:52.560680Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/sigma-reg variant_count=5
+2026-03-17T19:40:52.632906Z [debug    ] browser_rendered               size=826406 url=https://www.safcodental.com/product/sigma-reg
+2026-03-17T19:40:52.677015Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/sigma-reg variant_count=5
+2026-03-17T19:40:52.696275Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/pulse-trade-latex
+2026-03-17T19:40:52.716095Z [info     ] product_extracted              url=https://www.safcodental.com/product/sigma-reg variants=5
+2026-03-17T19:40:53.088204Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/aurelia-reg-vibrant-trade variant_count=4
+2026-03-17T19:40:53.147509Z [debug    ] browser_rendered               size=792859 url=https://www.safcodental.com/product/aurelia-reg-vibrant-trade
+2026-03-17T19:40:53.185873Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/aurelia-reg-vibrant-trade variant_count=4
+2026-03-17T19:40:53.203612Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/microflex-reg-comfortgrip-trade
+2026-03-17T19:40:53.219447Z [info     ] product_extracted              url=https://www.safcodental.com/product/aurelia-reg-vibrant-trade variants=4
+2026-03-17T19:40:54.100981Z [debug    ] browser_rendered               size=320020 url=https://www.safcodental.com/product/micropro-textured
+2026-03-17T19:40:54.132750Z [info     ] extractor_no_table_stub        from_price=12.49 url=https://www.safcodental.com/product/micropro-textured
+2026-03-17T19:40:54.132845Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/micropro-textured variant_count=1
+2026-03-17T19:40:54.150029Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/cyntek-reg
+2026-03-17T19:40:54.153218Z [info     ] product_extracted              url=https://www.safcodental.com/product/micropro-textured variants=1
+2026-03-17T19:40:55.998671Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/pulse-trade-latex variant_count=5
+2026-03-17T19:40:56.056880Z [debug    ] browser_rendered               size=782858 url=https://www.safcodental.com/product/pulse-trade-latex
+2026-03-17T19:40:56.095562Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/pulse-trade-latex variant_count=5
+2026-03-17T19:40:56.113204Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/vitalgard-reg
+2026-03-17T19:40:56.131700Z [info     ] product_extracted              url=https://www.safcodental.com/product/pulse-trade-latex variants=5
+2026-03-17T19:40:56.321686Z [debug    ] browser_rendered               size=290080 url=https://www.safcodental.com/product/microflex-reg-comfortgrip-trade
+2026-03-17T19:40:56.354064Z [info     ] extractor_no_table_stub        from_price=13.49 url=https://www.safcodental.com/product/microflex-reg-comfortgrip-trade
+2026-03-17T19:40:56.354147Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/microflex-reg-comfortgrip-trade variant_count=1
+2026-03-17T19:40:56.371456Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/aurelia-reg-distinct-reg
+2026-03-17T19:40:56.378825Z [info     ] product_extracted              url=https://www.safcodental.com/product/microflex-reg-comfortgrip-trade variants=1
+2026-03-17T19:40:57.471666Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/cyntek-reg variant_count=5
+2026-03-17T19:40:57.529518Z [debug    ] browser_rendered               size=839579 url=https://www.safcodental.com/product/cyntek-reg
+2026-03-17T19:40:57.567135Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/cyntek-reg variant_count=5
+2026-03-17T19:40:57.583022Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/blossom-reg
+2026-03-17T19:40:57.599569Z [info     ] product_extracted              url=https://www.safcodental.com/product/cyntek-reg variants=5
+2026-03-17T19:40:59.659297Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/vitalgard-reg variant_count=1
+2026-03-17T19:40:59.711168Z [debug    ] browser_rendered               size=515325 url=https://www.safcodental.com/product/vitalgard-reg
+2026-03-17T19:40:59.730108Z [debug    ] browser_rendered               size=320753 url=https://www.safcodental.com/product/aurelia-reg-distinct-reg
+2026-03-17T19:40:59.752055Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/vitalgard-reg variant_count=1
+2026-03-17T19:40:59.767852Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/beesure-reg-latex
+2026-03-17T19:40:59.775313Z [info     ] product_extracted              url=https://www.safcodental.com/product/vitalgard-reg variants=1
+2026-03-17T19:40:59.776860Z [info     ] extractor_no_table_stub        from_price=8.79 url=https://www.safcodental.com/product/aurelia-reg-distinct-reg
+2026-03-17T19:40:59.776998Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/aurelia-reg-distinct-reg variant_count=1
+2026-03-17T19:40:59.793177Z [info     ] product_extracted              url=https://www.safcodental.com/product/aurelia-reg-distinct-reg variants=1
+2026-03-17T19:40:59.795698Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/safco-durasoft-trade-latex-gloves
+2026-03-17T19:41:00.927977Z [debug    ] browser_rendered               size=385706 url=https://www.safcodental.com/product/blossom-reg
+2026-03-17T19:41:00.983998Z [info     ] extractor_no_table_stub        from_price=8.59 url=https://www.safcodental.com/product/blossom-reg
+2026-03-17T19:41:00.984059Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/blossom-reg variant_count=1
+2026-03-17T19:41:01.000785Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/polymed-reg
+2026-03-17T19:41:01.001613Z [info     ] product_extracted              url=https://www.safcodental.com/product/blossom-reg variants=1
+2026-03-17T19:41:02.812546Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/safco-durasoft-trade-latex-gloves variant_count=5
+2026-03-17T19:41:02.889019Z [debug    ] browser_rendered               size=974436 url=https://www.safcodental.com/product/safco-durasoft-trade-latex-gloves
+2026-03-17T19:41:02.936735Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/safco-durasoft-trade-latex-gloves variant_count=5
+2026-03-17T19:41:02.957477Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/proderm-trade
+2026-03-17T19:41:02.971833Z [info     ] product_extracted              url=https://www.safcodental.com/product/safco-durasoft-trade-latex-gloves variants=5
+2026-03-17T19:41:03.538586Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/beesure-reg-latex variant_count=5
+2026-03-17T19:41:03.600049Z [debug    ] browser_rendered               size=868536 url=https://www.safcodental.com/product/beesure-reg-latex
+2026-03-17T19:41:03.636737Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/beesure-reg-latex variant_count=5
+2026-03-17T19:41:03.654336Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/essential-textured
+2026-03-17T19:41:03.673131Z [info     ] product_extracted              url=https://www.safcodental.com/product/beesure-reg-latex variants=5
+2026-03-17T19:41:04.308926Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/polymed-reg variant_count=1
+2026-03-17T19:41:04.348938Z [debug    ] browser_rendered               size=461964 url=https://www.safcodental.com/product/polymed-reg
+2026-03-17T19:41:04.384866Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/polymed-reg variant_count=1
+2026-03-17T19:41:04.402653Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/microflex-reg-xceed-reg
+2026-03-17T19:41:04.408157Z [info     ] product_extracted              url=https://www.safcodental.com/product/polymed-reg variants=1
+2026-03-17T19:41:06.220140Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/proderm-trade variant_count=3
+2026-03-17T19:41:06.271296Z [debug    ] browser_rendered               size=661712 url=https://www.safcodental.com/product/proderm-trade
+2026-03-17T19:41:06.308844Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/proderm-trade variant_count=3
+2026-03-17T19:41:06.328004Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/beesure-reg-slim-trade-nitrile
+2026-03-17T19:41:06.343189Z [info     ] product_extracted              url=https://www.safcodental.com/product/proderm-trade variants=3
+2026-03-17T19:41:06.721107Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/essential-textured variant_count=1
+2026-03-17T19:41:06.760953Z [debug    ] browser_rendered               size=462512 url=https://www.safcodental.com/product/essential-textured
+2026-03-17T19:41:06.797524Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/essential-textured variant_count=1
+2026-03-17T19:41:06.814035Z [info     ] product_extracted              url=https://www.safcodental.com/product/essential-textured variants=1
+2026-03-17T19:41:06.814297Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/aurelia-sup-reg-sup-perform-sup-trade-sup
+2026-03-17T19:41:08.071343Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/microflex-reg-xceed-reg variant_count=5
+2026-03-17T19:41:08.134324Z [debug    ] browser_rendered               size=871008 url=https://www.safcodental.com/product/microflex-reg-xceed-reg
+2026-03-17T19:41:08.177653Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/microflex-reg-xceed-reg variant_count=5
+2026-03-17T19:41:08.194332Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/hu-friedy-nitrile-utility-gloves
+2026-03-17T19:41:08.225758Z [info     ] product_extracted              url=https://www.safcodental.com/product/microflex-reg-xceed-reg variants=5
+2026-03-17T19:41:09.700913Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/beesure-reg-slim-trade-nitrile variant_count=4
+2026-03-17T19:41:09.763637Z [debug    ] browser_rendered               size=770579 url=https://www.safcodental.com/product/beesure-reg-slim-trade-nitrile
+2026-03-17T19:41:09.805673Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/beesure-reg-slim-trade-nitrile variant_count=4
+2026-03-17T19:41:09.821675Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/alasta-sup-reg-sup-white
+2026-03-17T19:41:09.829882Z [info     ] product_extracted              url=https://www.safcodental.com/product/beesure-reg-slim-trade-nitrile variants=4
+2026-03-17T19:41:09.941739Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/aurelia-sup-reg-sup-perform-sup-trade-sup variant_count=2
+2026-03-17T19:41:09.989742Z [debug    ] browser_rendered               size=603622 url=https://www.safcodental.com/product/aurelia-sup-reg-sup-perform-sup-trade-sup
+2026-03-17T19:41:10.023379Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/aurelia-sup-reg-sup-perform-sup-trade-sup variant_count=2
+2026-03-17T19:41:10.041877Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/aurelia-sup-reg-sup-transform-sup-reg-sup
+2026-03-17T19:41:10.045120Z [info     ] product_extracted              url=https://www.safcodental.com/product/aurelia-sup-reg-sup-perform-sup-trade-sup variants=2
+2026-03-17T19:41:11.676728Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/hu-friedy-nitrile-utility-gloves variant_count=4
+2026-03-17T19:41:11.732267Z [debug    ] browser_rendered               size=827139 url=https://www.safcodental.com/product/hu-friedy-nitrile-utility-gloves
+2026-03-17T19:41:11.772841Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/hu-friedy-nitrile-utility-gloves variant_count=4
+2026-03-17T19:41:11.788256Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/microflex-sup-reg-sup-ultraform-sup-trade-sup
+2026-03-17T19:41:11.805377Z [info     ] product_extracted              url=https://www.safcodental.com/product/hu-friedy-nitrile-utility-gloves variants=4
+2026-03-17T19:41:12.812944Z [debug    ] browser_rendered               size=320401 url=https://www.safcodental.com/product/alasta-sup-reg-sup-white
+2026-03-17T19:41:12.845935Z [info     ] extractor_no_table_stub        from_price=10.99 url=https://www.safcodental.com/product/alasta-sup-reg-sup-white
+2026-03-17T19:41:12.846018Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/alasta-sup-reg-sup-white variant_count=1
+2026-03-17T19:41:12.862401Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/halo-trade
+2026-03-17T19:41:12.885657Z [info     ] product_extracted              url=https://www.safcodental.com/product/alasta-sup-reg-sup-white variants=1
+2026-03-17T19:41:13.015278Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/aurelia-sup-reg-sup-transform-sup-reg-sup variant_count=4
+2026-03-17T19:41:13.070737Z [debug    ] browser_rendered               size=782537 url=https://www.safcodental.com/product/aurelia-sup-reg-sup-transform-sup-reg-sup
+2026-03-17T19:41:13.110215Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/aurelia-sup-reg-sup-transform-sup-reg-sup variant_count=4
+2026-03-17T19:41:13.128739Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/aqua-source-reg
+2026-03-17T19:41:13.172439Z [info     ] product_extracted              url=https://www.safcodental.com/product/aurelia-sup-reg-sup-transform-sup-reg-sup variants=4
+2026-03-17T19:41:15.123465Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/microflex-sup-reg-sup-ultraform-sup-trade-sup variant_count=8
+2026-03-17T19:41:15.205652Z [debug    ] browser_rendered               size=1164935 url=https://www.safcodental.com/product/microflex-sup-reg-sup-ultraform-sup-trade-sup
+2026-03-17T19:41:15.261390Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/microflex-sup-reg-sup-ultraform-sup-trade-sup variant_count=8
+2026-03-17T19:41:15.280728Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/aurelia-reg-amazing-reg
+2026-03-17T19:41:15.333755Z [info     ] product_extracted              url=https://www.safcodental.com/product/microflex-sup-reg-sup-ultraform-sup-trade-sup variants=8
+2026-03-17T19:41:16.173672Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/halo-trade variant_count=2
+2026-03-17T19:41:16.216601Z [debug    ] browser_rendered               size=533947 url=https://www.safcodental.com/product/halo-trade
+2026-03-17T19:41:16.250479Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/halo-trade variant_count=2
+2026-03-17T19:41:16.260245Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/aqua-source-reg variant_count=5
+2026-03-17T19:41:16.266826Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/safco-nitrilex-reg-ultrasoft-nitrile-gloves
+2026-03-17T19:41:16.277449Z [info     ] product_extracted              url=https://www.safcodental.com/product/halo-trade variants=2
+2026-03-17T19:41:16.323984Z [debug    ] browser_rendered               size=857085 url=https://www.safcodental.com/product/aqua-source-reg
+2026-03-17T19:41:16.367531Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/aqua-source-reg variant_count=5
+2026-03-17T19:41:16.384010Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/beesure-reg-superslim-trade-nitrile
+2026-03-17T19:41:16.397928Z [info     ] product_extracted              url=https://www.safcodental.com/product/aqua-source-reg variants=5
+2026-03-17T19:41:18.452172Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/aurelia-reg-amazing-reg variant_count=5
+2026-03-17T19:41:18.520866Z [debug    ] browser_rendered               size=941519 url=https://www.safcodental.com/product/aurelia-reg-amazing-reg
+2026-03-17T19:41:18.577173Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/aurelia-reg-amazing-reg variant_count=5
+2026-03-17T19:41:18.595223Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/pulse-nitrile
+2026-03-17T19:41:18.620340Z [info     ] product_extracted              url=https://www.safcodental.com/product/aurelia-reg-amazing-reg variants=5
+2026-03-17T19:41:19.292681Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/safco-nitrilex-reg-ultrasoft-nitrile-gloves variant_count=5
+2026-03-17T19:41:19.359144Z [debug    ] browser_rendered               size=1031027 url=https://www.safcodental.com/product/safco-nitrilex-reg-ultrasoft-nitrile-gloves
+2026-03-17T19:41:19.400413Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/safco-nitrilex-reg-ultrasoft-nitrile-gloves variant_count=5
+2026-03-17T19:41:19.415601Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/evolve-trade-300
+2026-03-17T19:41:19.434476Z [info     ] product_extracted              url=https://www.safcodental.com/product/safco-nitrilex-reg-ultrasoft-nitrile-gloves variants=5
+2026-03-17T19:41:19.573258Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/beesure-reg-superslim-trade-nitrile variant_count=4
+2026-03-17T19:41:19.637598Z [debug    ] browser_rendered               size=876571 url=https://www.safcodental.com/product/beesure-reg-superslim-trade-nitrile
+2026-03-17T19:41:19.679460Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/beesure-reg-superslim-trade-nitrile variant_count=4
+2026-03-17T19:41:19.696534Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/aquasoft
+2026-03-17T19:41:19.708972Z [info     ] product_extracted              url=https://www.safcodental.com/product/beesure-reg-superslim-trade-nitrile variants=4
+2026-03-17T19:41:21.957214Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/pulse-nitrile variant_count=5
+2026-03-17T19:41:22.023233Z [debug    ] browser_rendered               size=816816 url=https://www.safcodental.com/product/pulse-nitrile
+2026-03-17T19:41:22.068768Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/pulse-nitrile variant_count=5
+2026-03-17T19:41:22.086810Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/aurelia-reg-blush-reg
+2026-03-17T19:41:22.112356Z [info     ] product_extracted              url=https://www.safcodental.com/product/pulse-nitrile variants=5
+2026-03-17T19:41:22.598548Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/evolve-trade-300 variant_count=5
+2026-03-17T19:41:22.656157Z [debug    ] browser_rendered               size=857346 url=https://www.safcodental.com/product/evolve-trade-300
+2026-03-17T19:41:22.693682Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/evolve-trade-300 variant_count=5
+2026-03-17T19:41:22.709358Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/aurelia-sup-reg-sup-sonic-sup-reg-sup
+2026-03-17T19:41:22.725833Z [info     ] product_extracted              url=https://www.safcodental.com/product/evolve-trade-300 variants=5
+2026-03-17T19:41:23.112089Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/aquasoft variant_count=5
+2026-03-17T19:41:23.174255Z [debug    ] browser_rendered               size=927401 url=https://www.safcodental.com/product/aquasoft
+2026-03-17T19:41:23.213979Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/aquasoft variant_count=5
+2026-03-17T19:41:23.231125Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/revo200-reg
+2026-03-17T19:41:23.249619Z [info     ] product_extracted              url=https://www.safcodental.com/product/aquasoft variants=5
+2026-03-17T19:41:25.711809Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/aurelia-reg-blush-reg variant_count=4
+2026-03-17T19:41:25.772144Z [debug    ] browser_rendered               size=782112 url=https://www.safcodental.com/product/aurelia-reg-blush-reg
+2026-03-17T19:41:25.814844Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/aurelia-reg-blush-reg variant_count=4
+2026-03-17T19:41:25.839432Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/beesure-reg-glacier-nitrile
+2026-03-17T19:41:25.858944Z [info     ] product_extracted              url=https://www.safcodental.com/product/aurelia-reg-blush-reg variants=4
+2026-03-17T19:41:26.047128Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/aurelia-sup-reg-sup-sonic-sup-reg-sup variant_count=5
+2026-03-17T19:41:26.106953Z [debug    ] browser_rendered               size=883581 url=https://www.safcodental.com/product/aurelia-sup-reg-sup-sonic-sup-reg-sup
+2026-03-17T19:41:26.146235Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/aurelia-sup-reg-sup-sonic-sup-reg-sup variant_count=5
+2026-03-17T19:41:26.167382Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/microflex-reg-midknight-reg
+2026-03-17T19:41:26.181997Z [info     ] product_extracted              url=https://www.safcodental.com/product/aurelia-sup-reg-sup-sonic-sup-reg-sup variants=5
+2026-03-17T19:41:26.441825Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/revo200-reg variant_count=2
+2026-03-17T19:41:26.488656Z [debug    ] browser_rendered               size=594606 url=https://www.safcodental.com/product/revo200-reg
+2026-03-17T19:41:26.526944Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/revo200-reg variant_count=2
+2026-03-17T19:41:26.543078Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/crave-trade
+2026-03-17T19:41:26.547647Z [info     ] product_extracted              url=https://www.safcodental.com/product/revo200-reg variants=2
+2026-03-17T19:41:28.997081Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/beesure-reg-glacier-nitrile variant_count=4
+2026-03-17T19:41:29.053057Z [debug    ] browser_rendered               size=793851 url=https://www.safcodental.com/product/beesure-reg-glacier-nitrile
+2026-03-17T19:41:29.137678Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/beesure-reg-glacier-nitrile variant_count=4
+2026-03-17T19:41:29.156355Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/transcend-trade
+2026-03-17T19:41:29.164241Z [info     ] product_extracted              url=https://www.safcodental.com/product/beesure-reg-glacier-nitrile variants=4
+2026-03-17T19:41:29.358361Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/microflex-reg-midknight-reg variant_count=1
+2026-03-17T19:41:29.408407Z [debug    ] browser_rendered               size=508185 url=https://www.safcodental.com/product/microflex-reg-midknight-reg
+2026-03-17T19:41:29.448593Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/microflex-reg-midknight-reg variant_count=1
+2026-03-17T19:41:29.465303Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/pulse-reg-logic-trade
+2026-03-17T19:41:29.468377Z [info     ] product_extracted              url=https://www.safcodental.com/product/microflex-reg-midknight-reg variants=1
+2026-03-17T19:41:30.181074Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/crave-trade variant_count=4
+2026-03-17T19:41:30.234596Z [debug    ] browser_rendered               size=720766 url=https://www.safcodental.com/product/crave-trade
+2026-03-17T19:41:30.271599Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/crave-trade variant_count=4
+2026-03-17T19:41:30.287760Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/carbon-reg-nitrile
+2026-03-17T19:41:30.294672Z [info     ] product_extracted              url=https://www.safcodental.com/product/crave-trade variants=4
+2026-03-17T19:41:32.378466Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/transcend-trade variant_count=4
+2026-03-17T19:41:32.434466Z [debug    ] browser_rendered               size=825750 url=https://www.safcodental.com/product/transcend-trade
+2026-03-17T19:41:32.477648Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/transcend-trade variant_count=4
+2026-03-17T19:41:32.496096Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/inspire-trade
+2026-03-17T19:41:32.504663Z [info     ] product_extracted              url=https://www.safcodental.com/product/transcend-trade variants=4
+2026-03-17T19:41:32.562309Z [debug    ] browser_rendered               size=289325 url=https://www.safcodental.com/product/pulse-reg-logic-trade
+2026-03-17T19:41:32.593828Z [info     ] extractor_no_table_stub        from_price=17.49 url=https://www.safcodental.com/product/pulse-reg-logic-trade
+2026-03-17T19:41:32.593902Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/pulse-reg-logic-trade variant_count=1
+2026-03-17T19:41:32.610205Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/aurelia-reg-absolute-trade
+2026-03-17T19:41:32.613159Z [info     ] product_extracted              url=https://www.safcodental.com/product/pulse-reg-logic-trade variants=1
+2026-03-17T19:41:33.669330Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/carbon-reg-nitrile variant_count=5
+2026-03-17T19:41:33.725685Z [debug    ] browser_rendered               size=856530 url=https://www.safcodental.com/product/carbon-reg-nitrile
+2026-03-17T19:41:33.764162Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/carbon-reg-nitrile variant_count=5
+2026-03-17T19:41:33.783570Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/safco-nitrilex-prevail-trade-nitrile-gloves
+2026-03-17T19:41:33.793895Z [info     ] product_extracted              url=https://www.safcodental.com/product/carbon-reg-nitrile variants=5
+2026-03-17T19:41:35.798111Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/inspire-trade variant_count=5
+2026-03-17T19:41:35.806836Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/aurelia-reg-absolute-trade variant_count=5
+2026-03-17T19:41:35.869423Z [debug    ] browser_rendered               size=901956 url=https://www.safcodental.com/product/inspire-trade
+2026-03-17T19:41:35.872749Z [debug    ] browser_rendered               size=872140 url=https://www.safcodental.com/product/aurelia-reg-absolute-trade
+2026-03-17T19:41:35.917531Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/inspire-trade variant_count=5
+2026-03-17T19:41:35.919961Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/aurelia-reg-absolute-trade variant_count=5
+2026-03-17T19:41:35.938328Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/luxe-trade
+2026-03-17T19:41:35.942512Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/aurelia-reg-sonic-reg-100
+2026-03-17T19:41:35.967252Z [info     ] product_extracted              url=https://www.safcodental.com/product/inspire-trade variants=5
+2026-03-17T19:41:35.970305Z [info     ] product_extracted              url=https://www.safcodental.com/product/aurelia-reg-absolute-trade variants=5
+2026-03-17T19:41:37.064582Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/safco-nitrilex-prevail-trade-nitrile-gloves variant_count=5
+2026-03-17T19:41:37.126098Z [debug    ] browser_rendered               size=996857 url=https://www.safcodental.com/product/safco-nitrilex-prevail-trade-nitrile-gloves
+2026-03-17T19:41:37.164323Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/safco-nitrilex-prevail-trade-nitrile-gloves variant_count=5
+2026-03-17T19:41:37.183137Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/aurelia-sup-reg-sup-robust-sup-reg-sup
+2026-03-17T19:41:37.192846Z [info     ] product_extracted              url=https://www.safcodental.com/product/safco-nitrilex-prevail-trade-nitrile-gloves variants=5
+2026-03-17T19:41:39.085996Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/luxe-trade variant_count=5
+2026-03-17T19:41:39.144700Z [debug    ] browser_rendered               size=890952 url=https://www.safcodental.com/product/luxe-trade
+2026-03-17T19:41:39.185588Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/luxe-trade variant_count=5
+2026-03-17T19:41:39.202605Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/aurelia-reg-bold-reg
+2026-03-17T19:41:39.226012Z [info     ] product_extracted              url=https://www.safcodental.com/product/luxe-trade variants=5
+2026-03-17T19:41:39.568373Z [debug    ] browser_rendered               size=320548 url=https://www.safcodental.com/product/aurelia-reg-sonic-reg-100
+2026-03-17T19:41:39.602234Z [info     ] extractor_no_table_stub        from_price=6.99 url=https://www.safcodental.com/product/aurelia-reg-sonic-reg-100
+2026-03-17T19:41:39.602323Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/aurelia-reg-sonic-reg-100 variant_count=1
+2026-03-17T19:41:39.619526Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/revosoft-reg-nitrile-gloves
+2026-03-17T19:41:39.621329Z [info     ] product_extracted              url=https://www.safcodental.com/product/aurelia-reg-sonic-reg-100 variants=1
+2026-03-17T19:41:40.126593Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/aurelia-sup-reg-sup-robust-sup-reg-sup variant_count=1
+2026-03-17T19:41:40.168880Z [debug    ] browser_rendered               size=513440 url=https://www.safcodental.com/product/aurelia-sup-reg-sup-robust-sup-reg-sup
+2026-03-17T19:41:40.202933Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/aurelia-sup-reg-sup-robust-sup-reg-sup variant_count=1
+2026-03-17T19:41:40.216110Z [info     ] product_extracted              url=https://www.safcodental.com/product/aurelia-sup-reg-sup-robust-sup-reg-sup variants=1
+2026-03-17T19:41:40.219163Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/safco-nitrilex-surpass-trade
+2026-03-17T19:41:42.728300Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/revosoft-reg-nitrile-gloves variant_count=4
+2026-03-17T19:41:42.732183Z [debug    ] browser_rendered               size=292452 url=https://www.safcodental.com/product/aurelia-reg-bold-reg
+2026-03-17T19:41:42.767309Z [info     ] extractor_no_table_stub        from_price=7.99 url=https://www.safcodental.com/product/aurelia-reg-bold-reg
+2026-03-17T19:41:42.767391Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/aurelia-reg-bold-reg variant_count=1
+2026-03-17T19:41:42.790539Z [info     ] product_extracted              url=https://www.safcodental.com/product/aurelia-reg-bold-reg variants=1
+2026-03-17T19:41:42.799319Z [debug    ] browser_rendered               size=782674 url=https://www.safcodental.com/product/revosoft-reg-nitrile-gloves
+2026-03-17T19:41:42.800178Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/microflex-reg-92-134
+2026-03-17T19:41:42.840553Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/revosoft-reg-nitrile-gloves variant_count=4
+2026-03-17T19:41:42.858887Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/alasta-sup-reg-sup-shimmer-pink-nitrile
+2026-03-17T19:41:42.870191Z [info     ] product_extracted              url=https://www.safcodental.com/product/revosoft-reg-nitrile-gloves variants=4
+2026-03-17T19:41:43.485333Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/safco-nitrilex-surpass-trade variant_count=5
+2026-03-17T19:41:43.550405Z [debug    ] browser_rendered               size=1036978 url=https://www.safcodental.com/product/safco-nitrilex-surpass-trade
+2026-03-17T19:41:43.591883Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/safco-nitrilex-surpass-trade variant_count=5
+2026-03-17T19:41:43.607787Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/beesure-ultraslim-nitrile
+2026-03-17T19:41:43.621573Z [info     ] product_extracted              url=https://www.safcodental.com/product/safco-nitrilex-surpass-trade variants=5
+2026-03-17T19:41:45.965067Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/alasta-sup-reg-sup-shimmer-pink-nitrile variant_count=4
+2026-03-17T19:41:46.017902Z [debug    ] browser_rendered               size=723947 url=https://www.safcodental.com/product/alasta-sup-reg-sup-shimmer-pink-nitrile
+2026-03-17T19:41:46.055206Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/alasta-sup-reg-sup-shimmer-pink-nitrile variant_count=4
+2026-03-17T19:41:46.075343Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/safco-nitrilex-black
+2026-03-17T19:41:46.088373Z [info     ] product_extracted              url=https://www.safcodental.com/product/alasta-sup-reg-sup-shimmer-pink-nitrile variants=4
+2026-03-17T19:41:46.322313Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/microflex-reg-92-134 variant_count=2
+2026-03-17T19:41:46.371215Z [debug    ] browser_rendered               size=594930 url=https://www.safcodental.com/product/microflex-reg-92-134
+2026-03-17T19:41:46.405530Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/microflex-reg-92-134 variant_count=2
+2026-03-17T19:41:46.422924Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/carbon-reg-air
+2026-03-17T19:41:46.432126Z [info     ] product_extracted              url=https://www.safcodental.com/product/microflex-reg-92-134 variants=2
+2026-03-17T19:41:47.036332Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/beesure-ultraslim-nitrile variant_count=4
+2026-03-17T19:41:47.092546Z [debug    ] browser_rendered               size=804134 url=https://www.safcodental.com/product/beesure-ultraslim-nitrile
+2026-03-17T19:41:47.127530Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/beesure-ultraslim-nitrile variant_count=4
+2026-03-17T19:41:47.144375Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/micro-touch-reg-nitrafree-trade-blue
+2026-03-17T19:41:47.154427Z [info     ] product_extracted              url=https://www.safcodental.com/product/beesure-ultraslim-nitrile variants=4
+2026-03-17T19:41:49.204073Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/safco-nitrilex-black variant_count=4
+2026-03-17T19:41:49.265613Z [debug    ] browser_rendered               size=828498 url=https://www.safcodental.com/product/safco-nitrilex-black
+2026-03-17T19:41:49.309810Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/safco-nitrilex-black variant_count=4
+2026-03-17T19:41:49.327821Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/micro-touch-reg-nitrafree-trade-pink
+2026-03-17T19:41:49.351717Z [info     ] product_extracted              url=https://www.safcodental.com/product/safco-nitrilex-black variants=4
+2026-03-17T19:41:49.817813Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/carbon-reg-air variant_count=5
+2026-03-17T19:41:49.875133Z [debug    ] browser_rendered               size=882123 url=https://www.safcodental.com/product/carbon-reg-air
+2026-03-17T19:41:49.912519Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/carbon-reg-air variant_count=5
+2026-03-17T19:41:49.930232Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/microflex-reg-midknight-trade-touch
+2026-03-17T19:41:49.949959Z [info     ] product_extracted              url=https://www.safcodental.com/product/carbon-reg-air variants=5
+2026-03-17T19:41:50.170130Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/micro-touch-reg-nitrafree-trade-blue variant_count=1
+2026-03-17T19:41:50.210946Z [debug    ] browser_rendered               size=478313 url=https://www.safcodental.com/product/micro-touch-reg-nitrafree-trade-blue
+2026-03-17T19:41:50.241926Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/micro-touch-reg-nitrafree-trade-blue variant_count=1
+2026-03-17T19:41:50.257725Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/trueform
+2026-03-17T19:41:50.262834Z [info     ] product_extracted              url=https://www.safcodental.com/product/micro-touch-reg-nitrafree-trade-blue variants=1
+2026-03-17T19:41:52.278016Z [debug    ] browser_rendered               size=321030 url=https://www.safcodental.com/product/micro-touch-reg-nitrafree-trade-pink
+2026-03-17T19:41:52.315624Z [info     ] extractor_no_table_stub        from_price=15.99 url=https://www.safcodental.com/product/micro-touch-reg-nitrafree-trade-pink
+2026-03-17T19:41:52.315707Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/micro-touch-reg-nitrafree-trade-pink variant_count=1
+2026-03-17T19:41:52.335004Z [info     ] product_extracted              url=https://www.safcodental.com/product/micro-touch-reg-nitrafree-trade-pink variants=1
+2026-03-17T19:41:52.338837Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/powerform-black
+2026-03-17T19:41:53.205930Z [debug    ] browser_rendered               size=320730 url=https://www.safcodental.com/product/microflex-reg-midknight-trade-touch
+2026-03-17T19:41:53.236711Z [info     ] extractor_no_table_stub        from_price=8.99 url=https://www.safcodental.com/product/microflex-reg-midknight-trade-touch
+2026-03-17T19:41:53.236793Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/microflex-reg-midknight-trade-touch variant_count=1
+2026-03-17T19:41:53.252313Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/quantum-blue
+2026-03-17T19:41:53.253221Z [info     ] product_extracted              url=https://www.safcodental.com/product/microflex-reg-midknight-trade-touch variants=1
+2026-03-17T19:41:53.369268Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/trueform variant_count=3
+2026-03-17T19:41:53.416400Z [debug    ] browser_rendered               size=606051 url=https://www.safcodental.com/product/trueform
+2026-03-17T19:41:53.470329Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/trueform variant_count=3
+2026-03-17T19:41:53.487257Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/bio-nitrile-sup-reg-sup
+2026-03-17T19:41:53.495190Z [info     ] product_extracted              url=https://www.safcodental.com/product/trueform variants=3
+2026-03-17T19:41:55.754953Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/powerform-black variant_count=5
+2026-03-17T19:41:55.810830Z [debug    ] browser_rendered               size=782895 url=https://www.safcodental.com/product/powerform-black
+2026-03-17T19:41:55.848893Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/powerform-black variant_count=5
+2026-03-17T19:41:55.867726Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/gloveup-sup-reg-sup
+2026-03-17T19:41:55.893267Z [info     ] product_extracted              url=https://www.safcodental.com/product/powerform-black variants=5
+2026-03-17T19:41:57.168046Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/bio-nitrile-sup-reg-sup variant_count=5
+2026-03-17T19:41:57.183101Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/quantum-blue variant_count=5
+2026-03-17T19:41:57.233896Z [debug    ] browser_rendered               size=840353 url=https://www.safcodental.com/product/bio-nitrile-sup-reg-sup
+2026-03-17T19:41:57.239304Z [debug    ] browser_rendered               size=806394 url=https://www.safcodental.com/product/quantum-blue
+2026-03-17T19:41:57.276778Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/bio-nitrile-sup-reg-sup variant_count=5
+2026-03-17T19:41:57.283330Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/quantum-blue variant_count=5
+2026-03-17T19:41:57.299990Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/black-maxx-sup-reg-sup
+2026-03-17T19:41:57.304451Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/safco-nitrilex-soothe
+2026-03-17T19:41:57.314233Z [info     ] product_extracted              url=https://www.safcodental.com/product/bio-nitrile-sup-reg-sup variants=5
+2026-03-17T19:41:57.318860Z [info     ] product_extracted              url=https://www.safcodental.com/product/quantum-blue variants=5
+2026-03-17T19:41:58.911532Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/gloveup-sup-reg-sup variant_count=5
+2026-03-17T19:41:58.969644Z [debug    ] browser_rendered               size=795736 url=https://www.safcodental.com/product/gloveup-sup-reg-sup
+2026-03-17T19:41:59.013375Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/gloveup-sup-reg-sup variant_count=5
+2026-03-17T19:41:59.034178Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/microflex-sup-reg-sup-neopro-sup-reg-sup
+2026-03-17T19:41:59.056304Z [info     ] product_extracted              url=https://www.safcodental.com/product/gloveup-sup-reg-sup variants=5
+2026-03-17T19:42:00.553404Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/black-maxx-sup-reg-sup variant_count=5
+2026-03-17T19:42:00.618219Z [debug    ] browser_rendered               size=765502 url=https://www.safcodental.com/product/black-maxx-sup-reg-sup
+2026-03-17T19:42:00.642000Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/safco-nitrilex-soothe variant_count=5
+2026-03-17T19:42:00.661574Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/black-maxx-sup-reg-sup variant_count=5
+2026-03-17T19:42:00.679527Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/nuvo-trade-drdae
+2026-03-17T19:42:00.693677Z [info     ] product_extracted              url=https://www.safcodental.com/product/black-maxx-sup-reg-sup variants=5
+2026-03-17T19:42:00.707148Z [debug    ] browser_rendered               size=898007 url=https://www.safcodental.com/product/safco-nitrilex-soothe
+2026-03-17T19:42:00.743628Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/safco-nitrilex-soothe variant_count=5
+2026-03-17T19:42:00.760076Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/microflex-sup-reg-sup-neogard-sup-reg-sup
+2026-03-17T19:42:00.773446Z [info     ] product_extracted              url=https://www.safcodental.com/product/safco-nitrilex-soothe variants=5
+2026-03-17T19:42:01.002831Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/microflex-sup-reg-sup-neopro-sup-reg-sup variant_count=2
+2026-03-17T19:42:01.048913Z [debug    ] browser_rendered               size=595947 url=https://www.safcodental.com/product/microflex-sup-reg-sup-neopro-sup-reg-sup
+2026-03-17T19:42:01.083427Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/microflex-sup-reg-sup-neopro-sup-reg-sup variant_count=2
+2026-03-17T19:42:01.100148Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/micro-touch-sup-reg-sup-affinity-sup-reg-sup
+2026-03-17T19:42:01.102053Z [info     ] product_extracted              url=https://www.safcodental.com/product/microflex-sup-reg-sup-neopro-sup-reg-sup variants=2
+2026-03-17T19:42:03.583095Z [debug    ] browser_rendered               size=224652 url=https://www.safcodental.com/product/nuvo-trade-drdae
+2026-03-17T19:42:03.641243Z [info     ] extractor_no_table_stub        from_price=7.49 url=https://www.safcodental.com/product/nuvo-trade-drdae
+2026-03-17T19:42:03.641375Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/nuvo-trade-drdae variant_count=1
+2026-03-17T19:42:03.657971Z [info     ] product_extracted              url=https://www.safcodental.com/product/nuvo-trade-drdae variants=1
+2026-03-17T19:42:03.661233Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/beesure-reg-neogrene-trade
+2026-03-17T19:42:04.275431Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/microflex-sup-reg-sup-neogard-sup-reg-sup variant_count=5
+2026-03-17T19:42:04.333949Z [debug    ] browser_rendered               size=858300 url=https://www.safcodental.com/product/microflex-sup-reg-sup-neogard-sup-reg-sup
+2026-03-17T19:42:04.370328Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/microflex-sup-reg-sup-neogard-sup-reg-sup variant_count=5
+2026-03-17T19:42:04.387503Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/flexaprene-green
+2026-03-17T19:42:04.400874Z [info     ] product_extracted              url=https://www.safcodental.com/product/microflex-sup-reg-sup-neogard-sup-reg-sup variants=5
+2026-03-17T19:42:05.445435Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/micro-touch-sup-reg-sup-affinity-sup-reg-sup variant_count=5
+2026-03-17T19:42:05.503402Z [debug    ] browser_rendered               size=869271 url=https://www.safcodental.com/product/micro-touch-sup-reg-sup-affinity-sup-reg-sup
+2026-03-17T19:42:05.546209Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/micro-touch-sup-reg-sup-affinity-sup-reg-sup variant_count=5
+2026-03-17T19:42:05.563114Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/aquaprene-reg
+2026-03-17T19:42:05.589849Z [info     ] product_extracted              url=https://www.safcodental.com/product/micro-touch-sup-reg-sup-affinity-sup-reg-sup variants=5
+2026-03-17T19:42:06.832949Z [debug    ] browser_rendered               size=320707 url=https://www.safcodental.com/product/beesure-reg-neogrene-trade
+2026-03-17T19:42:06.868684Z [info     ] extractor_no_table_stub        from_price=24.29 url=https://www.safcodental.com/product/beesure-reg-neogrene-trade
+2026-03-17T19:42:06.868768Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/beesure-reg-neogrene-trade variant_count=1
+2026-03-17T19:42:06.888565Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/microflex-sup-reg-sup-neosoft-trade
+2026-03-17T19:42:06.895221Z [info     ] product_extracted              url=https://www.safcodental.com/product/beesure-reg-neogrene-trade variants=1
+2026-03-17T19:42:07.327768Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/flexaprene-green variant_count=1
+2026-03-17T19:42:07.373278Z [debug    ] browser_rendered               size=504180 url=https://www.safcodental.com/product/flexaprene-green
+2026-03-17T19:42:07.407598Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/flexaprene-green variant_count=1
+2026-03-17T19:42:07.421619Z [info     ] product_extracted              url=https://www.safcodental.com/product/flexaprene-green variants=1
+2026-03-17T19:42:07.424755Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/safco-ez-green-chloroprene
+2026-03-17T19:42:08.419774Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/aquaprene-reg variant_count=5
+2026-03-17T19:42:08.486436Z [debug    ] browser_rendered               size=879025 url=https://www.safcodental.com/product/aquaprene-reg
+2026-03-17T19:42:08.523942Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/aquaprene-reg variant_count=5
+2026-03-17T19:42:08.540087Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/true-comfort-reg-blu
+2026-03-17T19:42:08.553984Z [info     ] product_extracted              url=https://www.safcodental.com/product/aquaprene-reg variants=5
+2026-03-17T19:42:08.820260Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/microflex-sup-reg-sup-neosoft-trade variant_count=2
+2026-03-17T19:42:08.865738Z [debug    ] browser_rendered               size=565202 url=https://www.safcodental.com/product/microflex-sup-reg-sup-neosoft-trade
+2026-03-17T19:42:08.898781Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/microflex-sup-reg-sup-neosoft-trade variant_count=2
+2026-03-17T19:42:08.915110Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/microflex-sup-reg-sup-neogard-trade-touch
+2026-03-17T19:42:08.918624Z [info     ] product_extracted              url=https://www.safcodental.com/product/microflex-sup-reg-sup-neosoft-trade variants=2
+2026-03-17T19:42:10.682436Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/safco-ez-green-chloroprene variant_count=4
+2026-03-17T19:42:10.737476Z [debug    ] browser_rendered               size=798508 url=https://www.safcodental.com/product/safco-ez-green-chloroprene
+2026-03-17T19:42:10.775030Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/safco-ez-green-chloroprene variant_count=4
+2026-03-17T19:42:10.792373Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/ocean-pacific-sup-reg-sup-neonatural-sup-trade-sup
+2026-03-17T19:42:10.806463Z [info     ] product_extracted              url=https://www.safcodental.com/product/safco-ez-green-chloroprene variants=4
+2026-03-17T19:42:11.630754Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/true-comfort-reg-blu variant_count=5
+2026-03-17T19:42:11.686679Z [debug    ] browser_rendered               size=765794 url=https://www.safcodental.com/product/true-comfort-reg-blu
+2026-03-17T19:42:11.723813Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/true-comfort-reg-blu variant_count=5
+2026-03-17T19:42:11.740046Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/encore-reg-sensi-touch-reg-pf
+2026-03-17T19:42:11.753594Z [info     ] product_extracted              url=https://www.safcodental.com/product/true-comfort-reg-blu variants=5
+2026-03-17T19:42:12.059021Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/microflex-sup-reg-sup-neogard-trade-touch variant_count=1
+2026-03-17T19:42:12.102225Z [debug    ] browser_rendered               size=482454 url=https://www.safcodental.com/product/microflex-sup-reg-sup-neogard-trade-touch
+2026-03-17T19:42:12.136276Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/microflex-sup-reg-sup-neogard-trade-touch variant_count=1
+2026-03-17T19:42:12.152077Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/dermassist-sup-reg-sup-latex-surgical-gloves
+2026-03-17T19:42:12.155771Z [info     ] product_extracted              url=https://www.safcodental.com/product/microflex-sup-reg-sup-neogard-trade-touch variants=1
+2026-03-17T19:42:13.506419Z [debug    ] browser_rendered               size=355301 url=https://www.safcodental.com/product/ocean-pacific-sup-reg-sup-neonatural-sup-trade-sup
+2026-03-17T19:42:13.536414Z [info     ] extractor_no_table_stub        from_price=23.49 url=https://www.safcodental.com/product/ocean-pacific-sup-reg-sup-neonatural-sup-trade-sup
+2026-03-17T19:42:13.536496Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/ocean-pacific-sup-reg-sup-neonatural-sup-trade-sup variant_count=1
+2026-03-17T19:42:13.552736Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/nitriderm-sup-reg-sup-nbsp-nitrile-surgical-gloves
+2026-03-17T19:42:13.558496Z [info     ] product_extracted              url=https://www.safcodental.com/product/ocean-pacific-sup-reg-sup-neonatural-sup-trade-sup variants=1
+2026-03-17T19:42:15.243269Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/encore-reg-sensi-touch-reg-pf variant_count=6
+2026-03-17T19:42:15.306547Z [debug    ] browser_rendered               size=915939 url=https://www.safcodental.com/product/encore-reg-sensi-touch-reg-pf
+2026-03-17T19:42:15.342850Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/encore-reg-sensi-touch-reg-pf variant_count=6
+2026-03-17T19:42:15.359796Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/perma-sharp-reg-sutures
+2026-03-17T19:42:15.377287Z [info     ] product_extracted              url=https://www.safcodental.com/product/encore-reg-sensi-touch-reg-pf variants=6
+2026-03-17T19:42:15.445097Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/dermassist-sup-reg-sup-latex-surgical-gloves variant_count=8
+2026-03-17T19:42:15.507209Z [debug    ] browser_rendered               size=1001826 url=https://www.safcodental.com/product/dermassist-sup-reg-sup-latex-surgical-gloves
+2026-03-17T19:42:15.572546Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/dermassist-sup-reg-sup-latex-surgical-gloves variant_count=8
+2026-03-17T19:42:15.589188Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/ethicon-sutures
+2026-03-17T19:42:15.613119Z [info     ] product_extracted              url=https://www.safcodental.com/product/dermassist-sup-reg-sup-latex-surgical-gloves variants=8
+2026-03-17T19:42:16.756486Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/nitriderm-sup-reg-sup-nbsp-nitrile-surgical-gloves variant_count=7
+2026-03-17T19:42:16.817377Z [debug    ] browser_rendered               size=930795 url=https://www.safcodental.com/product/nitriderm-sup-reg-sup-nbsp-nitrile-surgical-gloves
+2026-03-17T19:42:16.854435Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/nitriderm-sup-reg-sup-nbsp-nitrile-surgical-gloves variant_count=7
+2026-03-17T19:42:16.870852Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/look-trade-sutures
+2026-03-17T19:42:16.889911Z [info     ] product_extracted              url=https://www.safcodental.com/product/nitriderm-sup-reg-sup-nbsp-nitrile-surgical-gloves variants=7
+2026-03-17T19:42:20.263780Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/ethicon-sutures variant_count=20
+2026-03-17T19:42:20.425693Z [debug    ] browser_rendered               size=2983721 url=https://www.safcodental.com/product/ethicon-sutures
+2026-03-17T19:42:20.480688Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/ethicon-sutures variant_count=20
+2026-03-17T19:42:20.504455Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/myco-medical-reli-reg-pro-sutures
+2026-03-17T19:42:20.588968Z [info     ] product_extracted              url=https://www.safcodental.com/product/ethicon-sutures variants=20
+2026-03-17T19:42:21.269097Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/perma-sharp-reg-sutures variant_count=20
+2026-03-17T19:42:21.324162Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/look-trade-sutures variant_count=20
+2026-03-17T19:42:21.506667Z [debug    ] browser_rendered               size=3469934 url=https://www.safcodental.com/product/perma-sharp-reg-sutures
+2026-03-17T19:42:21.557166Z [debug    ] browser_rendered               size=3293597 url=https://www.safcodental.com/product/look-trade-sutures
+2026-03-17T19:42:21.563171Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/perma-sharp-reg-sutures variant_count=20
+2026-03-17T19:42:21.585632Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/safco-surestitch-trade-sutures
+2026-03-17T19:42:21.612108Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/look-trade-sutures variant_count=20
+2026-03-17T19:42:21.628985Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/suture-needles-integra-miltex
+2026-03-17T19:42:21.654745Z [info     ] product_extracted              url=https://www.safcodental.com/product/perma-sharp-reg-sutures variants=20
+2026-03-17T19:42:21.692159Z [info     ] product_extracted              url=https://www.safcodental.com/product/look-trade-sutures variants=20
+2026-03-17T19:42:24.491511Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/suture-needles-integra-miltex variant_count=1
+2026-03-17T19:42:24.532742Z [debug    ] browser_rendered               size=461799 url=https://www.safcodental.com/product/suture-needles-integra-miltex
+2026-03-17T19:42:24.565692Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/suture-needles-integra-miltex variant_count=1
+2026-03-17T19:42:24.577474Z [info     ] product_extracted              url=https://www.safcodental.com/product/suture-needles-integra-miltex variants=1
+2026-03-17T19:42:24.583490Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/surgical-blades-bard-parker-bd
+2026-03-17T19:42:25.948817Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/safco-surestitch-trade-sutures variant_count=15
+2026-03-17T19:42:26.077998Z [debug    ] browser_rendered               size=2133210 url=https://www.safcodental.com/product/safco-surestitch-trade-sutures
+2026-03-17T19:42:26.130432Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/safco-surestitch-trade-sutures variant_count=15
+2026-03-17T19:42:26.147671Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/surgical-blades-integra-miltex
+2026-03-17T19:42:26.204761Z [info     ] product_extracted              url=https://www.safcodental.com/product/safco-surestitch-trade-sutures variants=15
+2026-03-17T19:42:26.519055Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/surgical-blades-bard-parker-bd variant_count=6
+2026-03-17T19:42:26.584351Z [debug    ] browser_rendered               size=1031783 url=https://www.safcodental.com/product/surgical-blades-bard-parker-bd
+2026-03-17T19:42:26.623443Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/surgical-blades-bard-parker-bd variant_count=6
+2026-03-17T19:42:26.639416Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/surgical-blades
+2026-03-17T19:42:26.655454Z [info     ] product_extracted              url=https://www.safcodental.com/product/surgical-blades-bard-parker-bd variants=6
+2026-03-17T19:42:26.811709Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/myco-medical-reli-reg-pro-sutures variant_count=20
+2026-03-17T19:42:26.925291Z [debug    ] browser_rendered               size=2152252 url=https://www.safcodental.com/product/myco-medical-reli-reg-pro-sutures
+2026-03-17T19:42:26.972645Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/myco-medical-reli-reg-pro-sutures variant_count=20
+2026-03-17T19:42:26.988780Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/surgical-blade-handles-bard-parker-bd
+2026-03-17T19:42:27.047949Z [info     ] product_extracted              url=https://www.safcodental.com/product/myco-medical-reli-reg-pro-sutures variants=20
+2026-03-17T19:42:29.853532Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/surgical-blades-integra-miltex variant_count=17
+2026-03-17T19:42:29.928495Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/surgical-blades variant_count=9
+2026-03-17T19:42:29.963792Z [debug    ] browser_rendered               size=1958354 url=https://www.safcodental.com/product/surgical-blades-integra-miltex
+2026-03-17T19:42:30.014160Z [debug    ] browser_rendered               size=1258275 url=https://www.safcodental.com/product/surgical-blades
+2026-03-17T19:42:30.054378Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/surgical-blades-integra-miltex variant_count=17
+2026-03-17T19:42:30.075480Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/surgical-blades variant_count=9
+2026-03-17T19:42:30.087306Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/scalpel-handles-hu-friedy
+2026-03-17T19:42:30.093405Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/myco-medical-glassvan-reg-microsurgical-blades-carbon-steel
+2026-03-17T19:42:30.134614Z [info     ] product_extracted              url=https://www.safcodental.com/product/surgical-blades variants=9
+2026-03-17T19:42:30.150581Z [info     ] product_extracted              url=https://www.safcodental.com/product/surgical-blades-integra-miltex variants=17
+2026-03-17T19:42:31.409521Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/surgical-blade-handles-bard-parker-bd variant_count=2
+2026-03-17T19:42:31.455958Z [debug    ] browser_rendered               size=607424 url=https://www.safcodental.com/product/surgical-blade-handles-bard-parker-bd
+2026-03-17T19:42:31.495356Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/surgical-blade-handles-bard-parker-bd variant_count=2
+2026-03-17T19:42:31.511262Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/disposable-scalpels
+2026-03-17T19:42:31.518959Z [info     ] product_extracted              url=https://www.safcodental.com/product/surgical-blade-handles-bard-parker-bd variants=2
+2026-03-17T19:42:33.210710Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/myco-medical-glassvan-reg-microsurgical-blades-carbon-steel variant_count=2
+2026-03-17T19:42:33.258117Z [debug    ] browser_rendered               size=536985 url=https://www.safcodental.com/product/myco-medical-glassvan-reg-microsurgical-blades-carbon-steel
+2026-03-17T19:42:33.295098Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/myco-medical-glassvan-reg-microsurgical-blades-carbon-steel variant_count=2
+2026-03-17T19:42:33.312568Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/surgical-blades-hu-friedy
+2026-03-17T19:42:33.319732Z [info     ] product_extracted              url=https://www.safcodental.com/product/myco-medical-glassvan-reg-microsurgical-blades-carbon-steel variants=2
+2026-03-17T19:42:33.402375Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/scalpel-handles-hu-friedy variant_count=5
+2026-03-17T19:42:33.464007Z [debug    ] browser_rendered               size=979075 url=https://www.safcodental.com/product/scalpel-handles-hu-friedy
+2026-03-17T19:42:33.502275Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/scalpel-handles-hu-friedy variant_count=5
+2026-03-17T19:42:33.519041Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/disposable-scalpels-bard-parker-bd
+2026-03-17T19:42:33.532034Z [info     ] product_extracted              url=https://www.safcodental.com/product/scalpel-handles-hu-friedy variants=5
+2026-03-17T19:42:34.760281Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/disposable-scalpels variant_count=4
+2026-03-17T19:42:34.815206Z [debug    ] browser_rendered               size=781201 url=https://www.safcodental.com/product/disposable-scalpels
+2026-03-17T19:42:34.853208Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/disposable-scalpels variant_count=4
+2026-03-17T19:42:34.868836Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/disposable-scalpels-integra-miltex
+2026-03-17T19:42:34.888840Z [info     ] product_extracted              url=https://www.safcodental.com/product/disposable-scalpels variants=4
+2026-03-17T19:42:36.554625Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/disposable-scalpels-bard-parker-bd variant_count=3
+2026-03-17T19:42:36.603837Z [debug    ] browser_rendered               size=682798 url=https://www.safcodental.com/product/disposable-scalpels-bard-parker-bd
+2026-03-17T19:42:36.640619Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/disposable-scalpels-bard-parker-bd variant_count=3
+2026-03-17T19:42:36.657355Z [debug    ] browser_navigate               url=https://www.safcodental.com/product/feather-sup-reg-nbsp-sup-microsurgical-blades
+2026-03-17T19:42:36.668319Z [info     ] product_extracted              url=https://www.safcodental.com/product/disposable-scalpels-bard-parker-bd variants=3
+2026-03-17T19:42:36.755311Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/surgical-blades-hu-friedy variant_count=7
+2026-03-17T19:42:36.823834Z [debug    ] browser_rendered               size=1102012 url=https://www.safcodental.com/product/surgical-blades-hu-friedy
+2026-03-17T19:42:36.861775Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/surgical-blades-hu-friedy variant_count=7
+2026-03-17T19:42:36.893997Z [info     ] product_extracted              url=https://www.safcodental.com/product/surgical-blades-hu-friedy variants=7
+2026-03-17T19:42:37.724406Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/disposable-scalpels-integra-miltex variant_count=4
+2026-03-17T19:42:37.779718Z [debug    ] browser_rendered               size=769964 url=https://www.safcodental.com/product/disposable-scalpels-integra-miltex
+2026-03-17T19:42:37.815277Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/disposable-scalpels-integra-miltex variant_count=4
+2026-03-17T19:42:37.836437Z [info     ] product_extracted              url=https://www.safcodental.com/product/disposable-scalpels-integra-miltex variants=4
+2026-03-17T19:42:39.927827Z [debug    ] browser_live_dom_extracted     url=https://www.safcodental.com/product/feather-sup-reg-nbsp-sup-microsurgical-blades variant_count=4
+2026-03-17T19:42:39.975737Z [debug    ] browser_rendered               size=682298 url=https://www.safcodental.com/product/feather-sup-reg-nbsp-sup-microsurgical-blades
+2026-03-17T19:42:40.013140Z [info     ] extractor_css_success          url=https://www.safcodental.com/product/feather-sup-reg-nbsp-sup-microsurgical-blades variant_count=4
+2026-03-17T19:42:40.034984Z [info     ] product_extracted              url=https://www.safcodental.com/product/feather-sup-reg-nbsp-sup-microsurgical-blades variants=4
+2026-03-17T19:42:40.082515Z [info     ] browser_stopped               
+2026-03-17T19:42:40.082574Z [info     ] product_extraction_complete   
+2026-03-17T19:42:40.082599Z [info     ] stage_normalizer              
+2026-03-17T19:42:40.082620Z [info     ] normalizer_start              
+2026-03-17T19:42:41.211875Z [info     ] normalizer_batch               size=200
+2026-03-17T19:43:02.020008Z [info     ] normalizer_batch               size=200
+2026-03-17T19:43:34.122197Z [info     ] normalizer_batch               size=57
+2026-03-17T19:43:43.286929Z [info     ] normalizer_complete            total_normalized=457
+2026-03-17T19:43:43.287022Z [info     ] stage_validator               
+2026-03-17T19:43:43.287082Z [info     ] validator_start               
+2026-03-17T19:43:44.512172Z [info     ] validator_key_mismatch         group='Myco Medical RELI® PRO Sutures' renames={'Blade': 'Blade Type', 'Needle': 'Needle Type'}
+2026-03-17T19:43:45.941984Z [info     ] validator_complete             groups=99 products=457 specs_fixed=20
+2026-03-17T19:43:45.942142Z [info     ] stage_export                  
+2026-03-17T19:43:45.943074Z [info     ] database_initialised           path=frontier_dental.db
+2026-03-17T19:43:45.956438Z [info     ] exported_csv                   path=output/products.csv record_count=457
+2026-03-17T19:43:45.957426Z [info     ] database_initialised           path=frontier_dental.db
+2026-03-17T19:43:45.969260Z [info     ] exported_json                  path=output/products.json record_count=457
+2026-03-17T19:43:45.969448Z [info     ] export_complete                csv=output/products.csv json=output/products.json
+2026-03-17T19:43:45.970497Z [info     ] pipeline_summary               css_selector=457 elapsed_seconds=269.8 invalid=0 json_ld=55 llm_fallback=0 llm_fallback_rate_pct=0.0 total_records=512 valid=457 warning=0
