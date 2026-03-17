@@ -263,6 +263,8 @@ This project was built using **Claude Code** inside VS Code as the primary codin
 
 - **claude-devtools** -- A local repo used to trace prompt inputs, outputs, and context window contents during development. When an LLM agent (normalizer, validator) was producing unexpected output, claude-devtools made it possible to inspect exactly what prompt was sent, what the model returned, and whether context was being truncated or polluted — without guessing.
 
+- **Plan Mode** -- Before writing any code, Claude Code's Plan Mode was used to produce [PLAN.md](PLAN.md) — a detailed implementation document covering site research, architectural decisions, agent specifications, tech stack rationale, and the production hardening path. Plan Mode shifts the coding agent into a research and design role: rather than immediately generating code, it investigates the problem, and produces a written plan for review before implementation begins. PLAN.md then served as the implementation prompt for the rest of the session — each agent was built by pointing the coding agent at the relevant section of the plan, giving it precise context about expected inputs, outputs, and edge cases.
+
 ### Output-First Development for Scraping Agents
 
 For the deterministic agents (Navigator, Category Scraper, Product Scraper, Extractor), the most effective workflow was **providing the desired output before writing the extraction code**. Before implementing the Extractor, `products_example_output.csv` was created by hand with correct field values for a small set of real products — capturing the exact item numbers, prices, unit sizes, and category hierarchies that should appear in the final dataset.
