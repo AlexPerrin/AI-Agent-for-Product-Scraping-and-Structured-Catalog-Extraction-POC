@@ -44,12 +44,12 @@ Each agent is independent and communicates only through SQLite. Killing and rest
 
 **LLM usage decisions** -- AI is used only where deterministic code would be brittle or unmaintainable:
 
-| Agent | LLM Used? | Rationale |
-| ----- | --------- | --------- |
-| Navigator | No | Sitemap XML has a fixed schema; `xml.etree` parsing is deterministic and free |
-| Category Scraper | No | JSON-LD structured data is machine-readable by design; no ambiguity to resolve |
-| Product Scraper | No | Page rendering is a mechanical browser operation; no reasoning required |
-| Extractor | Fallback only | CSS selectors cover ~95% of pages; LLM only fires when the DOM returns nothing, avoiding cost on the hot path |
+| Agent | LLM at Runtime | Rationale |
+| ----- | -------------- | --------- |
+| Navigator | No — built with [coding agent](#how-i-use-ai-tools-in-development) | Sitemap XML has a fixed schema; `xml.etree` parsing is deterministic and free. Claude Code generated the sitemap fetch and URL filtering logic using the sitemap XML structure as ground truth. |
+| Category Scraper | No — built with [coding agent](#how-i-use-ai-tools-in-development) | JSON-LD structured data is machine-readable by design; no ambiguity to resolve. Claude Code wrote the BeautifulSoup parsing using the sitemap XML as ground truth for expected page structure. |
+| Product Scraper | No — built with [coding agent](#how-i-use-ai-tools-in-development) | Page rendering is a mechanical browser operation; no reasoning required. Claude Code used the sitemap XML as ground truth and identified the need for Playwright by comparing expected URLs against incomplete static HTTP responses. |
+| Extractor | Fallback only | CSS selectors cover ~95% of pages; LLM only fires when the DOM returns nothing, avoiding cost on the hot path. Claude Code wrote the selector logic using `products_example_output.csv` as ground truth, verifying extracted values matched known-correct field values. |
 | Normalizer | Yes | Two tasks that both require reasoning: (1) unit size strings (`"bx/100"`, `"per box of 100"`, `"2.5ml/vial"`) are too varied for regex; (2) specifications require the LLM to infer what an attribute *is* from context — e.g. recognising `"X-small"` as `Size`, `"#15C"` as `Shape`, `"Latex"` as `Material` — rather than just parsing a value |
 | Validator | Yes | The Normalizer LLM is not deterministic — it may label the same attribute `"Shape"` in one batch and `"Blade"` in another. The Validator ensures idempotency: union-find detects keys that are mutually exclusive across variants of the same product (a structural signal they occupy the same attribute slot), then the LLM confirms whether they are true aliases and picks one canonical name, guaranteeing consistent keys across the full dataset |
 
@@ -117,41 +117,67 @@ python main.py validate
 python main.py export
 ```
 
-### Running Without an API Key
+## Sample Outputs
 
-The pipeline works without an OpenRouter API key -- the extractor fallback and normalizer LLM steps are skipped (defaults are kept), and the validator falls back to deterministic most-frequent-key selection. The CSS selector extraction path and all other deterministic stages run normally.
+Full output files from a run across both target categories (64 products) are available for download:
 
-## Output Schema
+- [products.csv](output/products.csv)
+- [products.json](output/products.json)
+- [output.xlsx](output/output.xlsx)
 
-One row per orderable variant (SKU). Both CSV and JSON exports use this schema:
+### JSON
 
 ```json
 {
-  "product_group_name": "Wire glove box holder",
-  "product_name": "Wire glove box holder, double 11\"W x 10.5\"H x 4\"D",
-  "brand": "Unimed",
-  "item_number": "6220102",
-  "manufacturer_number": "BHDH004040",
-  "category_hierarchy": ["Dental Supplies", "Dental Exam Gloves", "Glove Holder"],
-  "product_group_url": "https://www.safcodental.com/product/wire-glove-box-holder",
-  "price": {"1": "21.49"},
-  "unit_size": "1",
-  "specifications": {"Capacity": "Double (holds 2 boxes)", "Dimensions": "11\"W x 10.5\"H x 4\"D"},
+  "product_group_name": "Nuvo™",
+  "product_name": "Nuvo vinyl gloves small 100/box",
+  "brand": "Dash",
+  "item_number": "4680227",
+  "manufacturer_number": "NV100S",
+  "category_hierarchy": ["Dental Supplies", "Dental Exam Gloves", "Vinyl gloves"],
+  "product_group_url": "https://www.safcodental.com/product/nuvo-trade",
+  "price": {"1": "7.49"},
+  "unit_size": "100/box",
+  "specifications": {"Size": "Small"},
   "availability": "In stock",
-  "description": "Three size options to hold 2, 3 or 4 glove boxes...",
-  "image_urls": ["https://www.safcodental.com/media/catalog/product/d/r/drvcd_lc.jpg"],
-  "scraped_at": "2026-03-17T18:42:00.654385",
+  "description": "Powder-free vinyl examination gloves.",
+  "image_urls": ["https://www.safcodental.com/media/catalog/product/d/r/druii_lc.jpg"],
+  "scraped_at": "2026-03-17T19:40:46.197745",
   "extraction_method": "css-selector",
   "validation_status": "valid",
   "validation_notes": null
 }
 ```
 
-**Price field**: A dict mapping quantity tier to price. Single-price items: `{"1": "36.99"}`. Volume pricing: `{"1": "36.99", "6": "32.99", "12": "29.99"}`.
+### CSV
 
-**Specifications field**: A JSON object of distinguishing attributes for the variant (size, color, shape, material, dimensions, etc.). Empty object `{}` when no variant-level attributes exist.
+| product\_group\_name | product\_name | brand | item\_number | manufacturer\_number | category\_hierarchy | product\_group\_url | Quantity | price\_per\_unit | availability | group\_description | unit\_size | specifications | image\_urls | scraped\_at | extraction\_method | validation\_status | validation\_notes |
+| -------------------- | ------------- | ----- | ------------ | -------------------- | ------------------- | ------------------- | -------- | ---------------- | ------------ | ------------------ | ---------- | -------------- | ----------- | ----------- | ------------------ | ------------------ | ----------------- |
+| Nuvo™ | Nuvo vinyl gloves small 100/box | Dash | 4680227 | NV100S | Dental Supplies / Dental Exam Gloves / Vinyl gloves | `https://…/nuvo-trade` | 1 | $7.49 | In stock | Powder-free vinyl examination gloves. | 100/box | `{"Size": "Small"}` | `https://…/druii_lc.jpg` | 2026-03-17T19:40:46 | css-selector | valid | |
 
-**CSV format**: The CSV flattens complex fields -- `price` becomes `Qty 1: $36.99 | Qty 6: $32.99`, `specifications` is serialized as a JSON string, lists become pipe-separated strings.
+## Output Schema
+
+One row per orderable variant (SKU). Both CSV and JSON exports use this schema:
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `product_group_name` | `string` | Name of the product group (parent listing shared across variants) |
+| `product_name` | `string` | Full name of this specific variant |
+| `brand` | `string` | Manufacturer or brand name |
+| `item_number` | `string` | Safco item number (unique per variant) |
+| `manufacturer_number` | `string` | Manufacturer's own part number |
+| `category_hierarchy` | `string[]` / `string` | Breadcrumb path from root to leaf category (array in JSON, `/`-separated in CSV) |
+| `product_group_url` | `string` | URL of the product page on safcodental.com |
+| `price` | `object` / `string` | Quantity-tier pricing; keys are minimum order quantities, values are unit prices (e.g. `{"1": "7.49", "6": "6.99"}`). Flattened to `Qty 1: $7.49 \| Qty 6: $6.99` in CSV. |
+| `unit_size` | `string` | Normalised pack size in canonical form (e.g. `100/box`, `2.5ml/vial`, `1`) |
+| `specifications` | `object` / `string` | LLM-inferred variant attributes such as `Size`, `Material`, `Shape`, `Color`, `Dimensions`. Empty object when no distinguishing attributes exist. Serialised as a JSON string in CSV. |
+| `availability` | `string` | Stock status as shown on the product page (e.g. `In stock`, `Backorder`) |
+| `description` | `string` | Product description |
+| `image_urls` | `string[]` / `string` | Product image URLs (array in JSON, pipe-separated in CSV) |
+| `scraped_at` | `string` (ISO 8601) | Timestamp of when the product page was scraped |
+| `extraction_method` | `string` | `css-selector` or `llm-fallback` — indicates which extraction path was used |
+| `validation_status` | `string` | `valid` for all records after validator runs |
+| `validation_notes` | `string \| null` | Additional notes from the validator, if any |
 
 ## Limitations
 
@@ -226,3 +252,21 @@ sqlite3 frontier_dental.db "SELECT url, error_msg FROM jobs WHERE status='tier2_
 # Check spec key variety across a product group
 sqlite3 frontier_dental.db "SELECT product_name, specifications FROM products WHERE product_group_name='Latex Examination Gloves'"
 ```
+
+## How I Use AI Tools in Development
+
+### Tooling Setup
+
+This project was built using **Claude Code** inside VS Code as the primary coding agent. Two integrations shaped the workflow significantly:
+
+- **Context7 MCP** -- Connected via MCP server, Context7 gives Claude Code access to live library documentation. Rather than relying on potentially stale training data, the agent fetches current docs for libraries like Playwright, LiteLLM, and httpx at the point of code generation. This was particularly useful when working with Playwright's async API, where small version-specific differences in method signatures would otherwise cause silent failures.
+
+- **claude-devtools** -- A local repo used to trace prompt inputs, outputs, and context window contents during development. When an LLM agent (normalizer, validator) was producing unexpected output, claude-devtools made it possible to inspect exactly what prompt was sent, what the model returned, and whether context was being truncated or polluted — without guessing.
+
+### Output-First Development for Scraping Agents
+
+For the deterministic agents (Navigator, Category Scraper, Product Scraper, Extractor), the most effective workflow was **providing the desired output before writing the extraction code**. Before implementing the Extractor, `products_example_output.csv` was created by hand with correct field values for a small set of real products — capturing the exact item numbers, prices, unit sizes, and category hierarchies that should appear in the final dataset.
+
+This gave the coding agent a concrete ground truth to work backwards from: instead of reasoning abstractly about what CSS selectors might exist on an unknown page, it could verify its extraction logic against known-correct values.
+
+The main challenge was that safcodental.com uses a Magento/Hyva frontend with heavily JS-rendered product pages. Static HTTP requests returned incomplete HTML with missing prices, variant tables, and specifications. The agent needed to be directed to use **Playwright to fully render each page** before attempting CSS extraction — a non-obvious requirement that only became clear once the expected output values were available for comparison and the raw HTTP responses could be shown to visibly lack them.
