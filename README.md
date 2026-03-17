@@ -117,6 +117,58 @@ python main.py validate
 python main.py export
 ```
 
+### Sample Log Output
+
+Each pipeline stage emits structured logs via `structlog`. Below is a representative sample from a full run ([full log](output/log.txt)):
+
+```text
+(venv) alex@alex-desktop:~/Frontier-Dental-POC$ python main.py run --reset --limit 100
+
+2026-03-17T19:39:16.188371Z [info ] orchestrator_start              export_only=False product_limit=100 reset=True skip_browser=False
+2026-03-17T19:39:16.191690Z [info ] database_initialised            path=frontier_dental.db
+2026-03-17T19:39:16.241042Z [info ] database_reset
+2026-03-17T19:39:16.241100Z [info ] stage_navigator
+2026-03-17T19:39:16.241153Z [info ] navigator_start
+2026-03-17T19:39:16.559481Z [debug] sitemap_parsed                  count=314 url=https://www.safcodental.com/catalog.xml
+2026-03-17T19:39:16.672958Z [debug] sitemap_parsed                  count=4168 url=https://www.safcodental.com/products.xml
+2026-03-17T19:39:16.674216Z [info ] navigator_categories_filtered   matched=16 total=314
+2026-03-17T19:39:17.123707Z [info ] navigator_complete              category_jobs=16 product_jobs=4168
+
+2026-03-17T19:39:17.123833Z [info ] stage_category_scraper
+2026-03-17T19:39:17.134591Z [info ] category_scraper_start
+2026-03-17T19:39:17.135066Z [info ] category_scraper_pending_jobs   count=16
+2026-03-17T19:39:17.135128Z [debug] http_get_no_raise               url=https://www.safcodental.com/catalog/gloves
+2026-03-17T19:39:30.221981Z [debug] category_scraped                products_found=56 url=https://www.safcodental.com/catalog/gloves
+2026-03-17T19:40:41.777594Z [info ] category_scraper_complete       processed=16 skipped_404=0
+
+2026-03-17T19:40:41.778307Z [info ] stage_product_scraper_extractor
+2026-03-17T19:40:41.784187Z [info ] product_extraction_limit_applied limit=100
+2026-03-17T19:40:41.784245Z [info ] product_extraction_start        job_count=100
+2026-03-17T19:40:42.461822Z [info ] browser_started
+2026-03-17T19:40:42.584409Z [debug] browser_navigate                url=https://www.safcodental.com/product/wire-glove-box-holder
+2026-03-17T19:40:45.945113Z [debug] browser_live_dom_extracted      url=https://www.safcodental.com/product/wire-glove-box-holder variant_count=3
+2026-03-17T19:40:46.009440Z [debug] browser_rendered                size=612164 url=https://www.safcodental.com/product/wire-glove-box-holder
+2026-03-17T19:40:46.056047Z [info ] extractor_css_success           url=https://www.safcodental.com/product/wire-glove-box-holder variant_count=3
+2026-03-17T19:42:40.082515Z [info ] browser_stopped
+2026-03-17T19:42:40.082574Z [info ] product_extraction_complete
+
+2026-03-17T19:42:40.082599Z [info ] stage_normalizer
+2026-03-17T19:42:40.082620Z [info ] normalizer_start
+2026-03-17T19:42:41.211875Z [info ] normalizer_batch                size=200
+2026-03-17T19:43:43.286929Z [info ] normalizer_complete             total_normalized=457
+
+2026-03-17T19:43:43.287022Z [info ] stage_validator
+2026-03-17T19:43:43.287082Z [info ] validator_start
+2026-03-17T19:43:44.512172Z [info ] validator_key_mismatch          group='Myco Medical RELI® PRO Sutures' renames={'Blade': 'Blade Type', 'Needle': 'Needle Type'}
+2026-03-17T19:43:45.941984Z [info ] validator_complete              groups=99 products=457 specs_fixed=20
+
+2026-03-17T19:43:45.942142Z [info ] stage_export
+2026-03-17T19:43:45.956438Z [info ] exported_csv                    path=output/products.csv record_count=457
+2026-03-17T19:43:45.969260Z [info ] exported_json                   path=output/products.json record_count=457
+2026-03-17T19:43:45.969448Z [info ] export_complete                 csv=output/products.csv json=output/products.json
+2026-03-17T19:43:45.970497Z [info ] pipeline_summary                elapsed_seconds=269.8 total_records=512 valid=457 warning=0 invalid=0 css_selector=457 llm_fallback=0 llm_fallback_rate_pct=0.0 json_ld=55
+```
+
 ## Sample Outputs
 
 Full output files from a run across both target categories (64 products) are available for download:
