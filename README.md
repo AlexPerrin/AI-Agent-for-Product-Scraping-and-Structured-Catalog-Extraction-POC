@@ -32,7 +32,7 @@ Each agent is independent and communicates only through SQLite. Killing and rest
 | 3 | **Product Scraper** | No | `Playwright`, `tenacity` | Renders JS-heavy product pages with a headless browser; retries on timeout; passes raw HTML to the Extractor |
 | 3 | **Extractor** | Fallback only | `BeautifulSoup` (primary), `LiteLLM` (fallback) | CSS selector extraction is primary; LLM `tool_use` activates only when selectors return empty |
 | 4 | **Normalizer** | Yes | `LiteLLM` | Normalizes `unit_size` into a canonical form (e.g. `"bx/100"` → `"100/box"`) and infers `specifications` attributes from context — reasoning that `"X-small"` is a `Size`, `"#15C"` is a `Shape`, `"Latex"` is a `Material`, etc. |
-| 5 | **Validator** | Hybrid | union-find (primary), `LiteLLM` (refinement) | Ensures specification attribute idempotency across LLM batches — detects when the same attribute was labelled differently (e.g. `"Shape"` vs `"Blade"`) and normalizes to one canonical key per attribute. Falls back to most-frequent-key selection when no API key is set. |
+| 5 | **Validator** | Yes | `LiteLLM` | Ensures specification attribute idempotency across LLM batches — detects when the same attribute was labelled differently (e.g. `"Shape"` vs `"Blade"`) and normalizes to one canonical key per attribute. Falls back to most-frequent-key selection when no API key is set. |
 
 ## Why This Approach
 
@@ -64,8 +64,8 @@ Each agent is independent and communicates only through SQLite. Killing and rest
 
 ```bash
 # Clone the repository
-git clone <repo-url>
-cd Frontier-Dental-POC
+git clone github.com/AlexPerrin/AI-Agent-for-Product-Scraping-and-Structured-Catalog-Extraction-POC/edit/main/README.md
+cd AI-Agent-for-Product-Scraping-and-Structured-Catalog-Extraction-POC
 
 # Create virtual environment
 python -m venv venv
