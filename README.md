@@ -123,7 +123,7 @@ Full output files from a run across both target categories (64 products) are ava
 
 - [products.csv](output/products.csv)
 - [products.json](output/products.json)
-- [output.xlsx](output/output.xlsx)
+- [products.xlsx](output/products.xlsx)
 
 ### JSON
 
