@@ -143,8 +143,6 @@ The robots.txt disallows query parameters for filtering, sorting, and pagination
 pages, we use `products.xml` from the sitemap as the authoritative source of product URLs.
 This avoids any robots.txt ambiguity and is more reliable.
 
----
-
 ## 3. Assumptions
 
 1. **Scraping is permitted for this POC.** The robots.txt does not disallow `/catalog/`
@@ -326,7 +324,7 @@ Products section
         ├── Sub-group heading   h3, h4, or labelled div
         └── Table rows          tr elements within the sub-group
               ├── Item #        td:nth-child(1)
-              ├── Product Name  td:nth-child(2) a
+              ├── Product Name  td:nth-child(2)
               ├── Mfr #         td:nth-child(3)
               ├── Description   td:nth-child(4)
               ├── Availability  td:nth-child(5)
@@ -515,8 +513,6 @@ Results are written back to `validation_status` and `validation_notes` fields.
 Invalid records are excluded from the final export. Warning records are included
 but flagged. This gives a clean output dataset with a traceable audit trail.
 
----
-
 ## 6. Tech Stack
 
 | Layer | Library | Rationale |
@@ -558,8 +554,6 @@ LiteLLM reads `OPENROUTER_API_KEY` from the environment automatically. Each agen
 calls `litellm.acompletion(model=settings.<agent>_model, ...)`, keeping all call sites
 model-agnostic. Swapping to a different provider (e.g. `openai/gpt-4o` or
 `google/gemini-2.0-flash`) requires changing only the model string in `.env`.
-
----
 
 ## 7. Output Schema
 
@@ -612,8 +606,6 @@ class ProductVariant(BaseModel):
     validation_notes: str | None
 ```
 
----
-
 ## 8. Project Structure
 
 ```
@@ -640,8 +632,6 @@ frontier-dental-poc/
 ├── requirements.txt
 └── README.md
 ```
-
----
 
 ## 9. Pipeline Execution Flow
 

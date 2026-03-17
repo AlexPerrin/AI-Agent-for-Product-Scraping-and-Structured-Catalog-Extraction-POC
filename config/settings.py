@@ -21,12 +21,12 @@ class Settings(BaseSettings):
     output_dir: str = "output"
 
     # --- Scraper behaviour ---
-    request_delay: float = 0.2
-    browser_concurrency: int = 5
+    request_delay: float = 1.0
+    browser_concurrency: int = 3
 
     # --- LLM batch sizes ---
-    normalizer_batch_size: int = 100
-    validator_batch_size: int = 50
+    normalizer_batch_size: int = 200
+    validator_batch_size: int = 200
 
     # --- Target categories (comma-separated in env) ---
     target_categories: list[str] = Field(
@@ -41,6 +41,6 @@ class Settings(BaseSettings):
         return v  # type: ignore[return-value]
 
     # --- Per-agent model selection ---
-    extractor_model: str = "openrouter/anthropic/claude-sonnet-4-5"
-    normalizer_model: str = "openrouter/anthropic/claude-haiku-4-5"
-    validator_model: str = "openrouter/anthropic/claude-sonnet-4-5"
+    extractor_model: str = "openrouter/minimax/minimax-m2.5"
+    normalizer_model: str = "openrouter/anthropic/claude-haiku-4.5"
+    validator_model: str = "openrouter/anthropic/claude-haiku-4.5"

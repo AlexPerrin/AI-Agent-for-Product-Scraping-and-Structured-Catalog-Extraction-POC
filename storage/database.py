@@ -181,6 +181,7 @@ async def get_products_for_normalization(
                product_group_name, group_description
           FROM products
          WHERE extraction_method IS NOT NULL
+           AND extraction_method != 'json-ld'
            AND validation_status = 'pending'
          LIMIT ?
         """,

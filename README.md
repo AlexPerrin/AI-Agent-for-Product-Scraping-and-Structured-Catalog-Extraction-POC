@@ -4,41 +4,35 @@ An AI-powered ETL pipeline that extracts structured product catalog data from Sa
 
 ## Architecture Overview
 
-```
-                          main.py (Typer CLI)
-                               |
-                    +-----------+-----------+
-                    |     ORCHESTRATOR      |
-                    |  Sequences all stages |
-                    +-----------+-----------+
-                               |
-         +---------------------+---------------------+
-         |                     |                      |
-   [1] Navigator        [2] Category           [3] Product Scraper
-   Sitemap XML ----->   Scraper (httpx) ----->  + Extractor
-   catalog.xml          JSON-LD parsing        Playwright render
-   products.xml         Partial records        CSS selectors (primary)
-   URL queue            to SQLite              LLM tool_use (fallback)
-         |                     |                      |
-         +---------------------+---------------------+
-                               |
-                    +----------+----------+
-                    |                     |
-              [4] Normalizer        [5] Validator
-              LLM batch norm        LLM semantic QA
-              unit_size, brand      valid/warning/invalid
-              (Haiku - cheap)       (Sonnet - reasoning)
-                    |                     |
-                    +----------+----------+
-                               |
-                    +----------+----------+
-                    |       EXPORT         |
-                    |  CSV + JSON output   |
-                    +----------------------+
+```mermaid
+flowchart TD
+    CLI["main.py (Typer CLI)"]
+    ORCH["Orchestrator<br>(sequences all stages)"]
+    NAV["[1] Navigator"]
+    CAT["[2] Category Scraper"]
+    PROD["[3] Product Scraper + Extractor"]
+    NORM["[4] Normalizer"]
+    VAL["[5] Validator"]
+    EXPORT["Export<br>CSV + JSON"]
+    DB[("SQLite<br>job queue + products")]
 
-Data flows through SQLite (job queue + product store).
-Each stage reads/writes job status, making the pipeline resumable.
+    CLI --> ORCH
+    ORCH --> NAV --> CAT --> PROD --> NORM --> VAL --> EXPORT
+    NAV & CAT & PROD & NORM & VAL <--> DB
 ```
+
+Each agent is independent and communicates only through SQLite. Killing and restarting the pipeline resumes from the last completed stage.
+
+### Agent Details
+
+| Stage | Agent | LLM | Tools | Responsibility |
+| ----- | ----- | --- | ----- | -------------- |
+| 1 | **Navigator** | No | `httpx`, `xml.etree` | Parses `catalog.xml` / `products.xml` sitemaps; filters to target categories; populates the job queue |
+| 2 | **Category Scraper** | No | `httpx`, `BeautifulSoup` | Fetches category pages via HTTP; extracts product URLs and partial metadata from JSON-LD structured data |
+| 3 | **Product Scraper** | No | `Playwright`, `tenacity` | Renders JS-heavy product pages with a headless browser; retries on timeout; passes raw HTML to the Extractor |
+| 3 | **Extractor** | Fallback only | `BeautifulSoup` (primary), `LiteLLM` (fallback) | CSS selector extraction is primary; LLM `tool_use` activates only when selectors return empty |
+| 4 | **Normalizer** | Yes | `LiteLLM` | Normalizes `unit_size` into a canonical form (e.g. `"bx/100"` → `"100/box"`) and infers `specifications` attributes from context — reasoning that `"X-small"` is a `Size`, `"#15C"` is a `Shape`, `"Latex"` is a `Material`, etc. |
+| 5 | **Validator** | Hybrid | union-find (primary), `LiteLLM` (refinement) | Ensures specification attribute idempotency across LLM batches — detects when the same attribute was labelled differently (e.g. `"Shape"` vs `"Blade"`) and normalizes to one canonical key per attribute. Falls back to most-frequent-key selection when no API key is set. |
 
 ## Why This Approach
 
@@ -46,20 +40,18 @@ Each stage reads/writes job status, making the pipeline resumable.
 
 **CSS selectors as primary extraction** -- For the known Magento/Hyva DOM structure, CSS selectors are fast, free, and deterministic. The LLM fallback only activates when selectors return empty results, keeping the hot path cost-free.
 
-**LLM where it adds real value** -- AI is used at exactly three points: (1) extraction fallback when CSS selectors fail, (2) unit size and brand normalization where regex is unmaintainable, and (3) semantic validation catching errors that structural checks cannot. Everything else is deterministic code.
-
 **Sitemap-first discovery** -- Rather than spidering the site, the pipeline reads `catalog.xml` and `products.xml` directly. This is faster, respects `robots.txt`, and gives a complete URL inventory without pagination concerns.
 
-## Agent Responsibilities
+**LLM usage decisions** -- AI is used only where deterministic code would be brittle or unmaintainable:
 
-| Agent | LLM? | What It Does |
-|-------|------|-------------|
-| **Navigator** | No | Parses sitemap XML files, filters URLs to target categories, populates the job queue |
-| **Category Scraper** | No | Fetches category pages via HTTP, extracts product metadata from JSON-LD structured data |
-| **Product Scraper** | No | Renders JS-heavy product pages using Playwright headless browser |
-| **Extractor** | Hybrid | CSS selector extraction (primary), LLM tool_use extraction (fallback when selectors fail) |
-| **Normalizer** | Yes | Batch-normalizes `unit_size` and `brand` fields using a cheap/fast model |
-| **Validator** | Yes | Semantic quality validation -- catches logical errors like $0.01 prices or misplaced field values |
+| Agent | LLM Used? | Rationale |
+| ----- | --------- | --------- |
+| Navigator | No | Sitemap XML has a fixed schema; `xml.etree` parsing is deterministic and free |
+| Category Scraper | No | JSON-LD structured data is machine-readable by design; no ambiguity to resolve |
+| Product Scraper | No | Page rendering is a mechanical browser operation; no reasoning required |
+| Extractor | Fallback only | CSS selectors cover ~95% of pages; LLM only fires when the DOM returns nothing, avoiding cost on the hot path |
+| Normalizer | Yes | Two tasks that both require reasoning: (1) unit size strings (`"bx/100"`, `"per box of 100"`, `"2.5ml/vial"`) are too varied for regex; (2) specifications require the LLM to infer what an attribute *is* from context — e.g. recognising `"X-small"` as `Size`, `"#15C"` as `Shape`, `"Latex"` as `Material` — rather than just parsing a value |
+| Validator | Hybrid | The Normalizer LLM is not deterministic — it may label the same attribute `"Shape"` in one batch and `"Blade"` in another. The Validator ensures idempotency: union-find detects keys that are mutually exclusive across variants of the same product (a structural signal they occupy the same attribute slot), then the LLM confirms whether they are true aliases and picks one canonical name, guaranteeing consistent keys across the full dataset |
 
 ## Setup and Execution
 
@@ -112,13 +104,19 @@ python main.py run --export-only
 # Check pipeline status
 python main.py status
 
+# Re-run normalizer on already-extracted data and export
+python main.py normalize
+
+# Re-run validator (spec key harmonization) on normalized data and export
+python main.py validate
+
 # Export existing data
 python main.py export
 ```
 
 ### Running Without an API Key
 
-The pipeline works without an OpenRouter API key -- it will skip LLM-dependent steps (extractor fallback, normalizer, validator) and use defaults. The CSS selector extraction path and all deterministic stages run normally.
+The pipeline works without an OpenRouter API key -- the extractor fallback and normalizer LLM steps are skipped (defaults are kept), and the validator falls back to deterministic most-frequent-key selection. The CSS selector extraction path and all other deterministic stages run normally.
 
 ## Output Schema
 
@@ -126,21 +124,20 @@ One row per orderable variant (SKU). Both CSV and JSON exports use this schema:
 
 ```json
 {
-  "product_group_name": "Adper Scotchbond Multi-Purpose",
-  "variant_name": "Scotchbond Multi-Purpose System Kit",
-  "brand": "3M / Solventum",
-  "safco_item_number": "2510134",
-  "manufacturer_part_number": "7540S",
-  "category_hierarchy": ["Dental Supplies", "Bonding Agents"],
-  "product_group_url": "https://www.safcodental.com/product/adper-scotchbond-multi-purpose",
-  "price": {"1": "553.99"},
-  "unit_size": "1/kit",
-  "availability": "In Stock",
-  "group_description": "Complete bonding system for...",
-  "subgroup_name": "Adper Scotchbond Multi-Purpose",
-  "image_urls": ["https://www.safcodental.com/media/catalog/product/..."],
-  "alternative_products": [],
-  "scraped_at": "2026-03-16T12:00:00",
+  "product_group_name": "Wire glove box holder",
+  "product_name": "Wire glove box holder, double 11\"W x 10.5\"H x 4\"D",
+  "brand": "Unimed",
+  "item_number": "6220102",
+  "manufacturer_number": "BHDH004040",
+  "category_hierarchy": ["Dental Supplies", "Dental Exam Gloves", "Glove Holder"],
+  "product_group_url": "https://www.safcodental.com/product/wire-glove-box-holder",
+  "price": {"1": "21.49"},
+  "unit_size": "1",
+  "specifications": {"Capacity": "Double (holds 2 boxes)", "Dimensions": "11\"W x 10.5\"H x 4\"D"},
+  "availability": "In stock",
+  "description": "Three size options to hold 2, 3 or 4 glove boxes...",
+  "image_urls": ["https://www.safcodental.com/media/catalog/product/d/r/drvcd_lc.jpg"],
+  "scraped_at": "2026-03-17T18:42:00.654385",
   "extraction_method": "css-selector",
   "validation_status": "valid",
   "validation_notes": null
@@ -149,7 +146,9 @@ One row per orderable variant (SKU). Both CSV and JSON exports use this schema:
 
 **Price field**: A dict mapping quantity tier to price. Single-price items: `{"1": "36.99"}`. Volume pricing: `{"1": "36.99", "6": "32.99", "12": "29.99"}`.
 
-**CSV format**: The CSV flattens complex fields -- price becomes `Qty 1: $36.99 | Qty 6: $32.99`, lists become pipe-separated strings.
+**Specifications field**: A JSON object of distinguishing attributes for the variant (size, color, shape, material, dimensions, etc.). Empty object `{}` when no variant-level attributes exist.
+
+**CSV format**: The CSV flattens complex fields -- `price` becomes `Qty 1: $36.99 | Qty 6: $32.99`, `specifications` is serialized as a JSON string, lists become pipe-separated strings.
 
 ## Limitations
 
@@ -168,14 +167,16 @@ One row per orderable variant (SKU). Both CSV and JSON exports use this schema:
 ## Failure Handling
 
 | Failure Mode | How It Is Handled |
-|-------------|-------------------|
+| ------------ | ----------------- |
 | HTTP 404 on category page | Job marked `skipped_404`, logged, pipeline continues |
 | HTTP error / timeout | Retried 3 times with exponential backoff (1s, 2s, 4s via tenacity) |
 | Playwright navigation timeout | Retried 2 times, then job marked `tier2_failed` with error details |
 | CSS selectors return empty | Automatic fallback to LLM extraction |
-| LLM API error | Logged, batch skipped, pipeline continues with next batch |
+| LLM API error (normalizer) | Logged, batch skipped, pipeline continues with next batch |
 | LLM returns unparseable JSON | Logged, batch marked with defaults, pipeline continues |
-| No API key configured | LLM steps skipped gracefully with warnings; deterministic steps run normally |
+| LLM rate limit | Exponential backoff retry (up to 6 attempts: 15s, 30s, 60s, 120s, 240s, 480s) |
+| LLM API error (validator) | Falls back to deterministic most-frequent-key selection for that product group |
+| No API key configured | LLM steps skipped gracefully with warnings; normalizer skips normalization, validator uses deterministic fallback |
 | Pipeline killed mid-run | Restart picks up from last checkpoint (each job has status in SQLite) |
 | Duplicate products | `UNIQUE` constraint on `safco_item_number`; upserts update existing records |
 
@@ -185,21 +186,23 @@ One row per orderable variant (SKU). Both CSV and JSON exports use this schema:
 
 2. **Distributed browser rendering** -- Replace the single Playwright process with a Playwright cluster or Browserless.io pool. The semaphore-based concurrency model already supports this pattern.
 
-3. **Replace SQLite with PostgreSQL** -- Add proper indexing on `safco_item_number`, `category_slug`, and `scraped_at`. Use connection pooling (asyncpg).
+3. **Replace SQLite with PostgreSQL** -- Add proper indexing to the products database and use connection pooling (asyncpg) to support concurrent writers across distributed workers.
 
-4. **Use a proper job queue** -- Replace the SQLite jobs table with Redis + ARQ or Celery for distributed task processing with dead-letter queues.
+4. **Implement the job queue with Kafka** -- Decouple the job queue from the products database entirely. Each pipeline stage becomes a Kafka consumer group, publishing completed work as events for the next stage. This enables independent scaling of each stage, persistent replay, and dead-letter handling without coupling job state to the product store.
 
-5. **Add proxy rotation** -- Configure rotating proxies and user agents to distribute request load across IPs.
+5. **Integrate structured logging with an observability platform** -- The pipeline already uses `structlog` with structured key-value output. Wire this into Datadog or Grafana to build dashboards and alerts for pipeline performance (throughput, latency per stage, retry rates) and data quality (LLM fallback rate, spec key corrections, extraction failures).
 
 6. **Schedule with Airflow or cron** -- Run differential scrapes (only reprocess products whose content hash changed) on a regular schedule.
 
-7. **Increase rate limits** -- Tune `REQUEST_DELAY` and `BROWSER_CONCURRENCY` based on observed rate limiting behavior.
+7. **Add proxy rotation** -- Configure rotating proxies and user agents to distribute request load across IPs.
+
+8. **Increase rate limits** -- Tune `REQUEST_DELAY` and `BROWSER_CONCURRENCY` based on observed rate limiting behavior.
 
 ## How to Monitor Data Quality
 
 1. **LLM fallback rate** -- Track the ratio of `extraction_method="llm-fallback"` records. A rising rate signals CSS selector degradation (site DOM changed). Run `python main.py status` to see current counts.
 
-2. **Validation status distribution** -- Monitor the `valid` / `warning` / `invalid` split. A spike in `invalid` records indicates extraction problems.
+2. **Spec key harmonization counts** -- The validator logs `specs_fixed` (number of records whose spec keys were renamed for consistency). A high count after a re-run signals the normalizer is producing inconsistent keys, likely due to LLM drift.
 
 3. **Known-page regression tests** -- Maintain a set of 10-20 known product pages with expected output. Run extraction against them after each deploy and alert if results diverge.
 
@@ -208,12 +211,15 @@ One row per orderable variant (SKU). Both CSV and JSON exports use this schema:
 5. **Database queries** -- The SQLite database is the source of truth. Query it directly to audit specific records, check job queue health, or investigate extraction failures:
 
 ```bash
-# Count by validation status
-sqlite3 frontier_dental.db "SELECT validation_status, COUNT(*) FROM products GROUP BY validation_status"
+# Count by extraction method
+sqlite3 frontier_dental.db "SELECT extraction_method, COUNT(*) FROM products GROUP BY extraction_method"
 
 # Find LLM fallback records
-sqlite3 frontier_dental.db "SELECT safco_item_number, variant_name FROM products WHERE extraction_method='llm-fallback'"
+sqlite3 frontier_dental.db "SELECT item_number, product_name FROM products WHERE extraction_method='llm-fallback'"
 
 # Check failed jobs
 sqlite3 frontier_dental.db "SELECT url, error_msg FROM jobs WHERE status='tier2_failed'"
+
+# Check spec key variety across a product group
+sqlite3 frontier_dental.db "SELECT product_name, specifications FROM products WHERE product_group_name='Latex Examination Gloves'"
 ```
